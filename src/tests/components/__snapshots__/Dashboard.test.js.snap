@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should correctly render Dashboard 1`] = `
+<div>
+  <button
+    className="button"
+    onClick={[Function]}
+  >
+    Logout
+  </button>
+</div>
+`;

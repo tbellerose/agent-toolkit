@@ -6,12 +6,13 @@
   "scripts": {
     "build:dev": "webpack",
     "dev-server": "webpack-dev-server --mode development",
-    "test": "jest",
+    "test": "jest --config=jest.config.json",
     "start": "node server/server.js"
   },
   "author": "Tyler Bellerose",
   "license": "ISC",
   "dependencies": {
+    "@okta/okta-react": "^1.0.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
