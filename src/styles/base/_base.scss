@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: $light-grey;
+    color: $dark-grey;
+    font-family: Helvetica, Arial, sas-serif;
+    font-size: $m-size;
+    line-height: 1.6;
+    padding-bottom: $m-size;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
