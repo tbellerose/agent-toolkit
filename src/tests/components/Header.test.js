@@ -1,17 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Header } from '../../components/Header';
+import user from '../fixtures/user';
 
-let wrapper, auth, user;
+let wrapper, auth;
 
 beforeEach(() => {
   auth = {
     logout: jest.fn(),
     isAuthenticated: jest.fn(),
   };
-  user = {
-    name: 'Test User'
-  }
   wrapper = shallow(<Header auth={auth} user={user} />);
 });
 
