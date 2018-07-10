@@ -2,11 +2,12 @@
 
 exports[`should correctly render Dashboard 1`] = `
 <div>
-  <button
-    className="button"
-    onClick={[Function]}
-  >
-    Logout
-  </button>
+  <LoadingPage />
+</div>
+`;
+
+exports[`should correctly render Dashboard 2`] = `
+<div>
+  <Connect(withAuth(Header)) />
 </div>
 `;
