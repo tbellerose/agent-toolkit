@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
-import { setUser } from '../actions/auth';
+import { setUser, clearUser } from '../actions/auth';
 import Header from './Header';
+import AccountSearch from './AccountSearch';
 import LoadingPage from './LoadingPage';
 
 export class Dashboard extends Component {
   state = { authenticated: null, userinfo: null };
 
   checkAuthentication = checkAuthentication;
-
-  logout = async () => {
-    this.props.auth.logout('/');
-  };
 
   async componentDidMount() {
     await this.checkAuthentication();
@@ -23,13 +20,17 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        {
-          this.state.userinfo
-            ? (
+        {this.state.userinfo
+          ? (
+            <div>
               <Header />
-            ) : (
-              <LoadingPage />
-            )
+              <div className="content-container">
+                <AccountSearch />
+              </div>
+            </div>
+          ) : (
+            <LoadingPage />
+          )
         }
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
+import { clearUser } from '../actions/auth';
 
 export class Header extends Component {
   state = { showMenu: false };
@@ -13,6 +14,7 @@ export class Header extends Component {
   };
 
   logout = () => {
+    this.props.clearUser();
     this.props.auth.logout('/');
   }
 
@@ -26,14 +28,12 @@ export class Header extends Component {
           <div>
             <button className="button button--link" onClick={this.toggleMenu}>
               {this.props.user && this.props.user.name}
-              {
-                this.state.showMenu
-                  ? <i className="arrow up"></i>
-                  : <i className="arrow down"></i>
+              {this.state.showMenu
+                ? <i className="arrow up"></i>
+                : <i className="arrow down"></i>
               }
             </button>
-            {
-              this.state.showMenu &&
+            {this.state.showMenu &&
               <div className="menu">
                 <button className="menu__item" onClick={this.logout}>Logout</button>
               </div>
@@ -49,4 +49,8 @@ const mapStateToProps = (state) => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps)(withAuth(Header));
+const mapDispatchToProps = (dispatch) => ({
+  clearUser: () => dispatch(clearUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Header));

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should correctly render AccountSearch 1`] = `
+<div
+  className="page-header"
+>
+  <div
+    className="page-header__content"
+  >
+    <input
+      autoFocus={true}
+      className="text-input"
+      onChange={[Function]}
+      placeholder="Auth Token"
+      type="text"
+      value=""
+    />
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      Search
+    </button>
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      Clear
+    </button>
+  </div>
+</div>
+`;
