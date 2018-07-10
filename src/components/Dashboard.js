@@ -11,10 +11,6 @@ export class Dashboard extends Component {
 
   checkAuthentication = checkAuthentication;
 
-  logout = async () => {
-    this.props.auth.logout('/');
-  };
-
   async componentDidMount() {
     await this.checkAuthentication();
     this.props.setUser(this.state.userinfo);
@@ -37,7 +33,7 @@ export class Dashboard extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setUser: (user) => dispatch(setUser(user))
+  setUser: (user) => dispatch(setUser(user)),
 });
 
 export default connect(undefined, mapDispatchToProps)(withAuth(Dashboard));

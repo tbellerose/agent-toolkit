@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
+import { clearUser } from '../actions/auth';
 
 export class Header extends Component {
   state = { showMenu: false };
@@ -13,6 +14,7 @@ export class Header extends Component {
   };
 
   logout = () => {
+    this.props.clearUser();
     this.props.auth.logout('/');
   }
 
@@ -49,4 +51,8 @@ const mapStateToProps = (state) => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps)(withAuth(Header));
+const mapDispatchToProps = (dispatch) => ({
+  clearUser: () => dispatch(clearUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Header));
