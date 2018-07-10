@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setToken, clearToken } from '../actions/auth';
+import { startSetSites, clearSites } from '../actions/sites';
 
 export class AccountSearch extends Component {
   state = {
@@ -15,13 +16,15 @@ export class AccountSearch extends Component {
     }));
   };
 
-  onSearch = () => {
+  onSearch = async () => {
     if (!this.state.authToken) {
       this.setState(() => ({
         error: 'Please provide an auth token'
       }));
     } else {
-      this.props.setToken(this.state.authToken);
+      await this.props.setToken(this.state.authToken);
+      await this.props.startSetSites();
+      console.log(this.props.sites);
     }
   };
 
@@ -30,6 +33,7 @@ export class AccountSearch extends Component {
       authToken: ''
     }));
     this.props.clearToken();
+    this.props.clearSites();
   };
 
   render() {
@@ -56,12 +60,15 @@ export class AccountSearch extends Component {
 };
 
 const mapStateToProps = (state) => ({
-  authToken: state.auth.token
+  authToken: state.auth.token,
+  sites: state.sites
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setToken: (token) => dispatch(setToken(token)),
-  clearToken: () => dispatch(clearToken())
+  clearToken: () => dispatch(clearToken()),
+  startSetSites: () => dispatch(startSetSites()),
+  clearSites: () => dispatch(clearSites())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountSearch);
