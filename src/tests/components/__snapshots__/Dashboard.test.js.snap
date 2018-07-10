@@ -8,6 +8,13 @@ exports[`should correctly render Dashboard 1`] = `
 
 exports[`should correctly render Dashboard 2`] = `
 <div>
-  <Connect(withAuth(Header)) />
+  <div>
+    <Connect(withAuth(Header)) />
+    <div
+      className="content-container"
+    >
+      <Connect(AccountSearch) />
+    </div>
+  </div>
 </div>
 `;

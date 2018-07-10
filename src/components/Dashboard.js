@@ -4,6 +4,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
 import { setUser, clearUser } from '../actions/auth';
 import Header from './Header';
+import AccountSearch from './AccountSearch';
 import LoadingPage from './LoadingPage';
 
 export class Dashboard extends Component {
@@ -21,7 +22,12 @@ export class Dashboard extends Component {
       <div>
         {this.state.userinfo
           ? (
-            <Header />
+            <div>
+              <Header />
+              <div className="content-container">
+                <AccountSearch />
+              </div>
+            </div>
           ) : (
             <LoadingPage />
           )

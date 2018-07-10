@@ -1,0 +1,12 @@
+.page-header {
+    background: white;
+    border-radius: 5px;
+    margin-bottom: $s-size;
+    padding: $s-size 0;
+    @include shadow-2dp();
+}
+
+.page-header__content {
+    display: flex;
+    justify-content: center;
+}
