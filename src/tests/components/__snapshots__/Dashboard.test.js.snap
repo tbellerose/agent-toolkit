@@ -2,6 +2,6 @@
 
 exports[`should correctly render Dashboard 1`] = `
 <div>
-  <withAuth(Header) />
+  <Connect(withAuth(Header)) />
 </div>
 `;

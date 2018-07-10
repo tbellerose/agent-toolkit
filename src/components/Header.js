@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
-import { checkAuthentication } from '../utils/auth';
 
 export class Header extends Component {
-  state = { showMenu: false, authenticated: null, userinfo: null };
-
-  checkAuthentication = checkAuthentication;
+  state = { showMenu: false };
 
   toggleMenu = () => {
     this.setState((prevState) => ({
@@ -18,14 +16,6 @@ export class Header extends Component {
     this.props.auth.logout('/');
   }
 
-  async componentDidUpdate() {
-    this.checkAuthentication();
-  }
-
-  async componentDidMount() {
-    this.checkAuthentication();
-  }
-
   render() {
     return (
       <header className="header">
@@ -34,17 +24,14 @@ export class Header extends Component {
             <h1>Agent Toolkit</h1>
           </Link>
           <div>
-            {
-              this.state.userinfo &&
-              <button className="button button--link" onClick={this.toggleMenu}>
-                {this.state.userinfo.name}
-                {
-                  this.state.showMenu
-                    ? <i className="arrow up"></i>
-                    : <i className="arrow down"></i>
-                }
-              </button>
-            }
+            <button className="button button--link" onClick={this.toggleMenu}>
+              {this.props.user && this.props.user.name}
+              {
+                this.state.showMenu
+                  ? <i className="arrow up"></i>
+                  : <i className="arrow down"></i>
+              }
+            </button>
             {
               this.state.showMenu &&
               <div className="menu">
@@ -58,4 +45,8 @@ export class Header extends Component {
   };
 };
 
-export default withAuth(Header);
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(withAuth(Header));

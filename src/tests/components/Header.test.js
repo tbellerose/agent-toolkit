@@ -2,18 +2,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Header } from '../../components/Header';
 
-let wrapper, auth, userinfo;
+let wrapper, auth, user;
 
 beforeEach(() => {
   auth = {
     logout: jest.fn(),
     isAuthenticated: jest.fn(),
   };
-  userinfo = {
+  user = {
     name: 'Test User'
   }
-  wrapper = shallow(<Header auth={auth} />);
-  wrapper.setState(() => ({ authenticated: true, userinfo }))
+  wrapper = shallow(<Header auth={auth} user={user} />);
 });
 
 test('should correctly render Header', () => {
