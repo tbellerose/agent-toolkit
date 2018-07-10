@@ -1,15 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AccountSearch } from '../../components/AccountSearch';
-import { prependOnceListener } from 'cluster';
 
 let wrapper, setToken, clearToken, authToken;
 
 beforeEach(() => {
   setToken = jest.fn();
   clearToken = jest.fn();
-  authToken = 'abc123'
-  wrapper = shallow(<AccountSearch setToken={setToken} clearToken={clearToken} />)
+  authToken = '';
+  wrapper = shallow(<AccountSearch setToken={setToken} clearToken={clearToken} authToken={authToken} />)
 });
 
 test('should correctly render AccountSearch', () => {
@@ -31,14 +30,14 @@ test('should not call setToken if input is empty', () => {
 });
 
 test('should call setToken if input is valid', () => {
-  wrapper.setState({ authToken });
+  wrapper.setState({ authToken: 'abc123' });
   wrapper.find('button').at(0).simulate('click');
   expect(wrapper.state('error')).toBe('');
-  expect(setToken).toHaveBeenCalledWith(authToken);
+  expect(setToken).toHaveBeenCalledWith('abc123');
 });
 
 test('should call clearToken', () => {
-  wrapper.setState({ authToken });
+  wrapper.setState({ authToken: 'abc123' });
   wrapper.find('button').at(1).simulate('click');
   expect(wrapper.state('authToken')).toBe('');
   expect(clearToken).toHaveBeenCalled();

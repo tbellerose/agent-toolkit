@@ -5,7 +5,7 @@ import { setToken, clearToken } from '../actions/auth';
 export class AccountSearch extends Component {
   state = {
     error: '',
-    authToken: ''
+    authToken: this.props.authToken
   };
 
   onAuthTokenChange = (e) => {
@@ -55,9 +55,13 @@ export class AccountSearch extends Component {
   };
 };
 
+const mapStateToProps = (state) => ({
+  authToken: state.auth.token
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setToken: (token) => dispatch(setToken(token)),
   clearToken: () => dispatch(clearToken())
 });
 
-export default connect(undefined, mapDispatchToProps)(AccountSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountSearch);
