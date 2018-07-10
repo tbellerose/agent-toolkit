@@ -34,11 +34,9 @@ export class Header extends Component {
             <h1>Agent Toolkit</h1>
           </Link>
           <div>
-            {this.state.userinfo &&
-              <button
-                className="button button--link"
-                onClick={this.toggleMenu}
-              >
+            {
+              this.state.userinfo &&
+              <button className="button button--link" onClick={this.toggleMenu}>
                 {this.state.userinfo.name}
                 {
                   this.state.showMenu
