@@ -2,11 +2,6 @@
 
 exports[`should correctly render Dashboard 1`] = `
 <div>
-  <button
-    className="button"
-    onClick={[Function]}
-  >
-    Logout
-  </button>
+  <withAuth(Header) />
 </div>
 `;

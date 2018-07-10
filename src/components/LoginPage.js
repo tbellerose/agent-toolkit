@@ -4,10 +4,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
 
 export class LoginPage extends Component {
-  state = {
-    authenticated: null,
-    userinfo: null
-  };
+  state = { authenticated: null, userinfo: null };
 
   checkAuthentication = checkAuthentication;
 

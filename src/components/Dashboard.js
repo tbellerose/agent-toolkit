@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
+import Header from './Header';
 
 export class Dashboard extends Component {
   logout = async () => {
@@ -9,7 +10,7 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <button className="button" onClick={this.logout}>Logout</button>
+        <Header />
       </div>
     );
   };
