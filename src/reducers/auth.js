@@ -1,4 +1,20 @@
-export default (state = {}, action) => {
+export const authReducerDefaultState = {
+  token: '',
+  user: {
+    sub: '',
+    name: '',
+    locale: '',
+    email: '',
+    preferred_username: '',
+    given_name: '',
+    family_name: '',
+    zoneinfo: '',
+    updated_at: 0,
+    email_verified: false
+  }
+}
+
+export default (state = authReducerDefaultState, action) => {
   switch (action.type) {
     case 'SET_USER':
       return {

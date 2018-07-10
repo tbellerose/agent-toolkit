@@ -1,5 +1,10 @@
-import authReducer from '../../reducers/auth';
+import authReducer, { authReducerDefaultState } from '../../reducers/auth';
 import user from '../fixtures/user';
+
+test('should set default auth state', () => {
+  const state = authReducer(undefined, { type: '@@INIT' });
+  expect(state).toEqual(authReducerDefaultState);
+});
 
 test('should set user', () => {
   const action = {
