@@ -9,7 +9,6 @@ test('should generate setSites action object', () => {
   });
 });
 
-
 test('should generate clearSites action object', () => {
   const action = clearSites();
   expect(action).toEqual({
