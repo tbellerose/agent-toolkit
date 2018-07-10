@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
-import { setUser } from '../actions/auth';
+import { setUser, clearUser } from '../actions/auth';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
 
@@ -19,13 +19,12 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        {
-          this.state.userinfo
-            ? (
-              <Header />
-            ) : (
-              <LoadingPage />
-            )
+        {this.state.userinfo
+          ? (
+            <Header />
+          ) : (
+            <LoadingPage />
+          )
         }
       </div>
     );
@@ -33,7 +32,7 @@ export class Dashboard extends Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setUser: (user) => dispatch(setUser(user)),
+  setUser: (user) => dispatch(setUser(user))
 });
 
 export default connect(undefined, mapDispatchToProps)(withAuth(Dashboard));

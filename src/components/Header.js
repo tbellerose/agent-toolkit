@@ -28,14 +28,12 @@ export class Header extends Component {
           <div>
             <button className="button button--link" onClick={this.toggleMenu}>
               {this.props.user && this.props.user.name}
-              {
-                this.state.showMenu
-                  ? <i className="arrow up"></i>
-                  : <i className="arrow down"></i>
+              {this.state.showMenu
+                ? <i className="arrow up"></i>
+                : <i className="arrow down"></i>
               }
             </button>
-            {
-              this.state.showMenu &&
+            {this.state.showMenu &&
               <div className="menu">
                 <button className="menu__item" onClick={this.logout}>Logout</button>
               </div>

@@ -26,18 +26,17 @@ export class LoginPage extends Component {
         {
           this.state.authenticated !== null &&
           <div>
-            {
-              this.state.authenticated
-                ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <div className="box-layout">
-                    <div className="box-layout__box">
-                      <h1 className="box-layout__title">Agent Toolkit</h1>
-                      <button className="button" onClick={this.login}>Login</button>
-                    </div>
+            {this.state.authenticated
+              ? (
+                <Redirect to="/dashboard" />
+              ) : (
+                <div className="box-layout">
+                  <div className="box-layout__box">
+                    <h1 className="box-layout__title">Agent Toolkit</h1>
+                    <button className="button" onClick={this.login}>Login</button>
                   </div>
-                )
+                </div>
+              )
             }
           </div>
         }
