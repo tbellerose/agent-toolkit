@@ -4,6 +4,7 @@ import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
 import { setUser } from '../actions/auth';
 import Header from './Header';
+import LoadingPage from './LoadingPage';
 
 export class Dashboard extends Component {
   state = { authenticated: null, userinfo: null };
@@ -22,7 +23,14 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {
+          this.state.userinfo
+            ? (
+              <Header />
+            ) : (
+              <LoadingPage />
+            )
+        }
       </div>
     );
   };

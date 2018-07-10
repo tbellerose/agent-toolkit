@@ -2,6 +2,12 @@
 
 exports[`should correctly render Dashboard 1`] = `
 <div>
+  <LoadingPage />
+</div>
+`;
+
+exports[`should correctly render Dashboard 2`] = `
+<div>
   <Connect(withAuth(Header)) />
 </div>
 `;
