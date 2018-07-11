@@ -16,7 +16,7 @@ export const startSetSites = () => {
         }
       });
       if (response.status !== 200) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+        throw new Error('Invalid or expired SSO Token');
       }
       const sites = await response.json();
       dispatch(setSites(sites));
