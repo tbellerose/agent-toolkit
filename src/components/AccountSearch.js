@@ -56,7 +56,7 @@ export class AccountSearch extends Component {
             type="text"
             value={this.state.authToken}
             onChange={this.onAuthTokenChange}
-            placeholder="Auth Token"
+            placeholder="SSO Token"
             autoFocus
           />
           <button className="button" onClick={this.onSearch}>Search</button>
