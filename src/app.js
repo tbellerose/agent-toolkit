@@ -18,18 +18,6 @@ import './styles/styles.scss';
 const { store, persistor } = configureStore();
 
 class App extends Component {
-  onUnload = (e) => {
-    persistor.purge();
-  };
-
-  componentDidMount() {
-    window.addEventListener('beforeunload', this.onUnload);
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload);
-  }
-
   render() {
     return (
       <Provider store={store}>
