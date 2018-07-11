@@ -11,7 +11,7 @@ exports[`should correctly render AccountSearch 1`] = `
       autoFocus={true}
       className="text-input"
       onChange={[Function]}
-      placeholder="Auth Token"
+      placeholder="SSO Token"
       type="text"
       value=""
     />
