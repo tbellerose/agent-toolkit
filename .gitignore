@@ -2,4 +2,4 @@ node_modules/
 public/dist/
 app.config.js
 fixtures/
-__snapshots__/
+*.snap
