@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { withAuth } from '@okta/okta-react';
 
 // Import App Router
 import AppRouter from './routers/AppRouter';
