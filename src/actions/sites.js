@@ -9,13 +9,20 @@ export const setSites = (sites) => ({
 export const startSetSites = () => {
   return async (dispatch, getState) => {
     const authToken = getState().auth.token;
-    const response = await fetch(`${config.api_uri}/sites`, {
-      headers: {
-        'Authorization': `sso-jwt ${authToken}`
+    try {
+      const response = await fetch(`${config.api_uri}/sites`, {
+        headers: {
+          'Authorization': `sso-jwt ${authToken}`
+        }
+      });
+      if (response.status !== 200) {
+        throw new Error(`${response.status}: ${response.statusText}`);
       }
-    });
-    const sites = await response.json();
-    dispatch(setSites(sites));
+      const sites = await response.json();
+      dispatch(setSites(sites));
+    } catch (e) {
+      return e;
+    }
   };
 };
 

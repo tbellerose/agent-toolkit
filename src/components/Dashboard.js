@@ -15,6 +15,9 @@ export class Dashboard extends Component {
 
   async componentDidMount() {
     await this.checkAuthentication();
+    if (!this.state.authenticated) {
+      this.props.history.push('/');
+    }
     this.props.setUser(this.state.userinfo);
   };
 

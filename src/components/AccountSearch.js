@@ -22,8 +22,17 @@ export class AccountSearch extends Component {
         error: 'Please provide an auth token'
       }));
     } else {
-      await this.props.setToken(this.state.authToken);
-      this.props.startSetSites();
+      this.props.setToken(this.state.authToken);
+      const error = await this.props.startSetSites();
+      if (error) {
+        this.setState(() => ({
+          error: error.message
+        }));
+      } else {
+        this.setState(() => ({
+          error: ''
+        }));
+      }
     }
   };
 
