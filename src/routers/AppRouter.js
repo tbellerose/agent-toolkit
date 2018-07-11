@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
-import LoginPage from '../components/LoginPage';
 import Dashboard from '../components/Dashboard';
+import LoginPage from '../components/LoginPage';
+import NotFoundPage from '../components/NotFoundPage';
 import config from '../../app.config';
 
 const AppRouter = () => (
@@ -16,6 +17,7 @@ const AppRouter = () => (
         <Route path="/" exact={true} component={LoginPage} />
         <Route path="/implicit/callback" component={ImplicitCallback} />
         <SecureRoute path="/dashboard" component={Dashboard} />
+        <Route component={NotFoundPage} />
       </Switch>
     </Security>
   </Router>
