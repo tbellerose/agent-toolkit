@@ -2,13 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AccountSearch } from '../../components/AccountSearch';
 
-let wrapper, setToken, clearToken, authToken;
+let wrapper, props;
 
 beforeEach(() => {
-  setToken = jest.fn();
-  clearToken = jest.fn();
-  authToken = '';
-  wrapper = shallow(<AccountSearch setToken={setToken} clearToken={clearToken} authToken={authToken} />)
+  props = {
+    setToken: jest.fn(),
+    clearToken: jest.fn(),
+    clearSites: jest.fn(),
+    authToken: ''
+  };
+  wrapper = shallow(<AccountSearch {...props} />);
 });
 
 test('should correctly render AccountSearch', () => {
@@ -26,19 +29,19 @@ test('should set authToken on input change', () => {
 test('should not call setToken if input is empty', () => {
   wrapper.find('button').at(0).simulate('click');
   expect(wrapper.state('error')).toEqual(expect.any(String));
-  expect(setToken).not.toHaveBeenCalled();
+  expect(props.setToken).not.toHaveBeenCalled();
 });
 
 test('should call setToken if input is valid', () => {
   wrapper.setState({ authToken: 'abc123' });
   wrapper.find('button').at(0).simulate('click');
   expect(wrapper.state('error')).toBe('');
-  expect(setToken).toHaveBeenCalledWith('abc123');
+  expect(props.setToken).toHaveBeenCalledWith('abc123');
 });
 
 test('should call clearToken', () => {
   wrapper.setState({ authToken: 'abc123' });
   wrapper.find('button').at(1).simulate('click');
   expect(wrapper.state('authToken')).toBe('');
-  expect(clearToken).toHaveBeenCalled();
+  expect(props.clearToken).toHaveBeenCalled();
 });

@@ -6,6 +6,7 @@ import { setUser, clearUser } from '../actions/auth';
 import Header from './Header';
 import AccountSearch from './AccountSearch';
 import LoadingPage from './LoadingPage';
+import SiteList from './SiteList';
 
 export class Dashboard extends Component {
   state = { authenticated: null, userinfo: null };
@@ -14,6 +15,9 @@ export class Dashboard extends Component {
 
   async componentDidMount() {
     await this.checkAuthentication();
+    if (!this.state.authenticated) {
+      this.props.history.push('/');
+    }
     this.props.setUser(this.state.userinfo);
   };
 
@@ -26,6 +30,7 @@ export class Dashboard extends Component {
               <Header />
               <div className="content-container">
                 <AccountSearch />
+                <SiteList />
               </div>
             </div>
           ) : (
