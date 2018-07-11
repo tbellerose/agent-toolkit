@@ -23,8 +23,7 @@ export class AccountSearch extends Component {
       }));
     } else {
       await this.props.setToken(this.state.authToken);
-      await this.props.startSetSites();
-      console.log(this.props.sites);
+      this.props.startSetSites();
     }
   };
 

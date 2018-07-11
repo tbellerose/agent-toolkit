@@ -11,7 +11,7 @@ beforeEach(() => {
     clearSites: jest.fn(),
     authToken: ''
   };
-  wrapper = shallow(<AccountSearch {...props} />)
+  wrapper = shallow(<AccountSearch {...props} />);
 });
 
 test('should correctly render AccountSearch', () => {

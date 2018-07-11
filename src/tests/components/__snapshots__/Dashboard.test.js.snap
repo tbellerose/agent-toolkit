@@ -14,6 +14,7 @@ exports[`should correctly render Dashboard 2`] = `
       className="content-container"
     >
       <Connect(AccountSearch) />
+      <Connect(SiteList) />
     </div>
   </div>
 </div>

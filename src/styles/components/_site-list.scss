@@ -1,0 +1,32 @@
+.site-list {
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    @include shadow-2dp();
+}
+
+.list-item {
+    align-items: center;
+    border: 1px solid darken($light-grey, 7%);
+    border-top: none;
+    color: $dark-grey;
+    display: flex;
+    flex-grow: 1;
+    font-size: $font-size-medium;
+    justify-content: space-between;
+    padding: $s-size / 2;
+    text-decoration: none;
+    transition: background .3s ease;
+    &:hover {
+        background: $light-grey;
+    }
+    > div {
+        flex-grow: 1;
+    }
+}
+
+.list-item--center {
+    @extend .list-item;
+    justify-content: center;
+}
