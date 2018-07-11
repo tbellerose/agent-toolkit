@@ -30,3 +30,14 @@
     @extend .list-item;
     justify-content: center;
 }
+
+.list-item__title {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: $s-size / 2;
+}
+
+.list-item__thumbnail {
+    @include shadow-2dp();
+}
