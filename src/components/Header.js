@@ -18,18 +18,6 @@ export class Header extends Component {
     this.props.auth.logout('/');
   };
 
-  onUnload = (e) => {
-    this.props.auth.logout();
-  };
-
-  componentDidMount() {
-    window.addEventListener('beforeunload', this.onUnload);
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload);
-  };
-
   render() {
     return (
       <header className="header">
