@@ -42,14 +42,14 @@ export class AccountSearch extends Component {
     }));
     this.props.clearToken();
     this.props.clearSites();
+    this.setState(() => ({
+      error: ''
+    }));
   };
 
   render() {
     return (
       <div className="page-header">
-        {!!this.state.error &&
-          <p className="form__error">{this.state.error}</p>
-        }
         <div className="page-header__content">
           <input
             className="text-input"
@@ -62,6 +62,9 @@ export class AccountSearch extends Component {
           <button className="button" onClick={this.onSearch}>Search</button>
           <button className="button" onClick={this.onClear}>Clear</button>
         </div>
+        {!!this.state.error &&
+          <p className="form__error">{this.state.error}</p>
+        }
       </div>
     );
   };
