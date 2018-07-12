@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
+import { Security, SecureRoute } from '@okta/okta-react';
+import ImplicitCallback from './ImplicitCallback';
 import Dashboard from '../components/Dashboard';
 import LoginPage from '../components/LoginPage';
 import ManageSite from '../components/ManageSite';
