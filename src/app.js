@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { withAuth } from '@okta/okta-react';
 
 // Import App Router
 import AppRouter from './routers/AppRouter';
@@ -18,18 +17,6 @@ import './styles/styles.scss';
 const { store, persistor } = configureStore();
 
 class App extends Component {
-  onUnload = (e) => {
-    persistor.purge();
-  };
-
-  componentDidMount() {
-    window.addEventListener('beforeunload', this.onUnload);
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload);
-  }
-
   render() {
     return (
       <Provider store={store}>

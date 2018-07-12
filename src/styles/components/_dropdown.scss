@@ -15,7 +15,7 @@
     transform: rotate(-135deg);
 }
 
-.menu {
+.dropdown-menu {
     background: $gd-green;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     position: absolute;
 }
 
-.menu__item {
+.dropdown-menu__item {
     background: none;
     border: none;
     color: white;

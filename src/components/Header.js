@@ -18,18 +18,6 @@ export class Header extends Component {
     this.props.auth.logout('/');
   };
 
-  onUnload = (e) => {
-    this.props.auth.logout();
-  };
-
-  componentDidMount() {
-    window.addEventListener('beforeunload', this.onUnload);
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload);
-  };
-
   render() {
     return (
       <header className="header">
@@ -46,8 +34,8 @@ export class Header extends Component {
               }
             </button>
             {this.state.showMenu &&
-              <div className="menu">
-                <button className="menu__item" onClick={this.logout}>Logout</button>
+              <div className="dropdown-menu">
+                <button className="dropdown-menu__item" onClick={this.logout}>Logout</button>
               </div>
             }
           </div>

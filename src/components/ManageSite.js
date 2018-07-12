@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import config from '../../app.config';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
+import SiteMenu from './SiteMenu';
 
 export class ManageSite extends Component {
   state = {
-    site: {}
+    site: {},
+    activeItem: 'general'
   };
 
   getSite = async () => {
@@ -22,6 +24,12 @@ export class ManageSite extends Component {
     }));
   };
 
+  handleItemClick = (activeItem) => {
+    this.setState(() => ({
+      activeItem
+    }));
+  };
+
   componentDidMount() {
     this.getSite();
   };
@@ -33,9 +41,13 @@ export class ManageSite extends Component {
         <div className="content-container">
           {this.state.site
             ? (
-              <div>
-                <h2>Primary Site</h2>
-                <h2>Staging Site</h2>
+              <div className="split-layout">
+                <div className="split-layout__left">
+                  <SiteMenu handleItemClick={this.handleItemClick} />
+                </div>
+                <div className="split-layout__right">
+                  {this.state.activeItem}
+                </div>
               </div>
             ) : (
               <LoadingPage />

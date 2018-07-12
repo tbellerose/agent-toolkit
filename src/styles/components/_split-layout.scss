@@ -1,0 +1,19 @@
+.split-layout {
+    align-items: flex-start;
+    display: flex;
+}
+
+.split-layout__left {
+    background: white;
+    border-radius: 5px;
+    width: 15vw;
+    @include shadow-2dp();
+}
+
+.split-layout__right {
+    background: white;
+    border-radius: 5px;
+    flex-grow: 1;
+    margin-left: $m-size;
+    @include shadow-2dp();
+}
