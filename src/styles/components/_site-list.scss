@@ -3,7 +3,7 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    @include shadow-2dp();
+    @include shadow-4dp();
 }
 
 .list-item {

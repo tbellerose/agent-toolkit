@@ -1,6 +1,7 @@
 .menu {
     display: flex;
     flex-direction: column;
+    @include shadow-4dp();
     .active {
         background: $gd-green;
         color: white;
