@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-export default class SiteMenuItem extends Component {
+export class SiteMenuItem extends Component {
   handleClick = (e) => {
     _.invoke(this.props, 'onClick', e, this.props);
   };
@@ -18,3 +18,5 @@ export default class SiteMenuItem extends Component {
     );
   };
 };
+
+export default SiteMenuItem;
