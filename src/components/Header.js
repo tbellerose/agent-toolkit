@@ -34,8 +34,8 @@ export class Header extends Component {
               }
             </button>
             {this.state.showMenu &&
-              <div className="menu">
-                <button className="menu__item" onClick={this.logout}>Logout</button>
+              <div className="dropdown-menu">
+                <button className="dropdown-menu__item" onClick={this.logout}>Logout</button>
               </div>
             }
           </div>

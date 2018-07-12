@@ -1,0 +1,16 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    .active {
+        background: $gd-green;
+        color: white;
+    }
+}
+
+.menu__item {
+    border-top: 1px solid darken($light-grey, 7%);
+    cursor: pointer;
+    font-size: $font-size-large;
+    padding: $s-size / 2;
+    text-align: center;
+}
