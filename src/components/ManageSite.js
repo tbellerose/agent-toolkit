@@ -47,7 +47,14 @@ export class ManageSite extends Component {
                   <SiteMenu handleItemClick={this.handleItemClick} />
                 </div>
                 <div className="split-layout__right">
-                  {this.state.activeItem === "general" && <GeneralCard site={this.state.site} />}
+                  {
+                    (() => {
+                      switch (this.state.activeItem) {
+                        case 'general':
+                          return <GeneralCard site={this.state.site} />
+                      }
+                    })()
+                  }
                 </div>
               </div>
             ) : (
