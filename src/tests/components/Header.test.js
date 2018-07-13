@@ -3,15 +3,20 @@ import { shallow } from 'enzyme';
 import { Header } from '../../components/Header';
 import user from '../fixtures/user';
 
-let wrapper, auth, clearUser;
+let wrapper, props;
 
 beforeEach(() => {
-  auth = {
-    logout: jest.fn(),
-    isAuthenticated: jest.fn(),
-  };
-  clearUser = jest.fn();
-  wrapper = shallow(<Header auth={auth} user={user} clearUser={clearUser} />);
+  props = {
+    auth: {
+      logout: jest.fn(),
+      isAuthenticated: jest.fn()
+    },
+    clearUser: jest.fn(),
+    clearToken: jest.fn(),
+    clearSites: jest.fn(),
+    user: user
+  }
+  wrapper = shallow(<Header {...props} />);
 });
 
 test('should correctly render Header', () => {
@@ -23,8 +28,10 @@ test('should update showMenu', () => {
   expect(wrapper.state('showMenu')).toBe(true);
 });
 
-test('should call auth.logout and clearUser', async () => {
+test('should call auth.logout and clean store', async () => {
   await wrapper.instance().logout();
-  expect(auth.logout).toHaveBeenCalled();
-  expect(clearUser).toHaveBeenCalled();
+  expect(props.auth.logout).toHaveBeenCalled();
+  expect(props.clearUser).toHaveBeenCalled();
+  expect(props.clearToken).toHaveBeenCalled();
+  expect(props.clearSites).toHaveBeenCalled();
 });

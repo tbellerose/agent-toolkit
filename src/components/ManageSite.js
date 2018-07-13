@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import config from '../../app.config';
+import { getAPI } from '../utils/api';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
 import SiteMenu from './SiteMenu';
+import GeneralCard from './GeneralCard';
+import DatabaseCard from './DatabaseCard';
+import ConnectionCard from './ConnectionCard';
 
 export class ManageSite extends Component {
   state = {
-    site: {},
-    activeItem: 'general'
+    site: null,
+    activeItem: 'general',
+    error: ''
   };
 
   getSite = async () => {
     const siteId = this.props.match.params.siteId;
-    const response = await fetch(`${config.api_uri}/sites/${siteId}`, {
-      headers: {
-        'Authorization': `sso-jwt ${this.props.authToken}`
-      }
-    });
-    const site = await response.json();
+    const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
     this.setState(() => ({
-      site
+      site,
+      error: site.error
     }));
   };
 
@@ -40,18 +40,29 @@ export class ManageSite extends Component {
         <Header />
         <div className="content-container">
           {this.state.site
-            ? (
-              <div className="split-layout">
-                <div className="split-layout__left">
-                  <SiteMenu handleItemClick={this.handleItemClick} />
-                </div>
-                <div className="split-layout__right">
-                  {this.state.activeItem}
-                </div>
+            ? <div className="split-layout">
+              <div className="split-layout__left">
+                <SiteMenu handleItemClick={this.handleItemClick} />
               </div>
-            ) : (
-              <LoadingPage />
-            )
+              <div className="split-layout__right">
+                {!!this.state.error
+                  ? <div className="card">{this.state.error}</div>
+                  : (() => {
+                    switch (this.state.activeItem) {
+                      case 'general':
+                        return <GeneralCard site={this.state.site} />;
+                      case 'database':
+                        return <DatabaseCard site={this.state.site} />;
+                      case 'ssh/sftp':
+                        return <ConnectionCard site={this.state.site} />;
+                      default:
+                        return null;
+                    }
+                  })()
+                }
+              </div>
+            </div>
+            : <LoadingPage />
           }
         </div>
       </div>

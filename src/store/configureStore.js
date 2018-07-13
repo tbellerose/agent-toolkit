@@ -10,6 +10,7 @@ const persistConfig = {
   key: 'root',
   storage
 };
+
 const persistedReducer = persistReducer(persistConfig, combineReducers({
   sites: sitesReducer,
   auth: authReducer

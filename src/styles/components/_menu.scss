@@ -1,9 +1,17 @@
 .menu {
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
+    @include shadow-4dp();
     .active {
         background: $gd-green;
         color: white;
+    }
+    :first-child {
+        border-radius: 5px 5px 0 0;
+    }
+    :last-child {
+        border-radius: 0 0 5px 5px;
     }
 }
 
