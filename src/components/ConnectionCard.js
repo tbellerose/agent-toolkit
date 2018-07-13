@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import callAPI from '../utils/api';
+import { getAPI } from '../utils/api';
 
 export class ConnectionCard extends Component {
   state = {
@@ -12,7 +12,7 @@ export class ConnectionCard extends Component {
 
   getConnectionInfo = async () => {
     const { authToken, site } = this.props;
-    const { hostname, port, status, error } = await callAPI(
+    const { hostname, port, status, error } = await getAPI(
       `/support/sites/${site.id}/ssh`,
       authToken
     );

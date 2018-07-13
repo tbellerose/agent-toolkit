@@ -1,6 +1,6 @@
 import config from '../../app.config';
 
-export default async (endpoint, authToken) => {
+export const getAPI = async (endpoint, authToken) => {
   try {
     const response = await fetch(`${config.api_uri}${endpoint}`, {
       headers: {

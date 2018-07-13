@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import callAPI from '../utils/api';
+import { getAPI } from '../utils/api';
 
 export class DatabaseCard extends Component {
   state = {
@@ -21,7 +21,7 @@ export class DatabaseCard extends Component {
       adminUsername,
       adminPassword,
       error
-    } = await callAPI(`/sites/${siteId}/database`, this.props.authToken);
+    } = await getAPI(`/sites/${siteId}/database`, this.props.authToken);
 
     this.setState(() => ({
       name,

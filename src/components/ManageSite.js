@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import callAPI from '../utils/api';
+import { getAPI } from '../utils/api';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
 import SiteMenu from './SiteMenu';
@@ -17,7 +17,7 @@ export class ManageSite extends Component {
 
   getSite = async () => {
     const siteId = this.props.match.params.siteId;
-    const site = await callAPI(`/sites/${siteId}`, this.props.authToken);
+    const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
     this.setState(() => ({
       site,
       error: site.error
