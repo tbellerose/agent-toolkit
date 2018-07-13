@@ -5,6 +5,7 @@ import Header from './Header';
 import LoadingPage from './LoadingPage';
 import SiteMenu from './SiteMenu';
 import GeneralCard from './GeneralCard';
+import DatabaseCard from './DatabaseCard';
 
 export class ManageSite extends Component {
   state = {
@@ -51,7 +52,11 @@ export class ManageSite extends Component {
                     (() => {
                       switch (this.state.activeItem) {
                         case 'general':
-                          return <GeneralCard site={this.state.site} />
+                          return <GeneralCard site={this.state.site} />;
+                        case 'database':
+                          return <DatabaseCard site={this.state.site} />;
+                        default:
+                          return null;
                       }
                     })()
                   }

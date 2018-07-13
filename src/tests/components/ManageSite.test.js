@@ -23,3 +23,10 @@ test('should correctly render ManageSite with general card', () => {
   }))
   expect(wrapper).toMatchSnapshot();
 });
+
+test('should correctly render ManageSite with database card', () => {
+  wrapper.setState(() => ({
+    activeItem: 'database'
+  }));
+  expect(wrapper).toMatchSnapshot();
+});
