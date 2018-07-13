@@ -4,10 +4,11 @@ import config from '../../app.config';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
 import SiteMenu from './SiteMenu';
+import GeneralCard from './GeneralCard';
 
 export class ManageSite extends Component {
   state = {
-    site: {},
+    site: null,
     activeItem: 'general'
   };
 
@@ -46,7 +47,7 @@ export class ManageSite extends Component {
                   <SiteMenu handleItemClick={this.handleItemClick} />
                 </div>
                 <div className="split-layout__right">
-                  {this.state.activeItem}
+                  {this.state.activeItem === "general" && <GeneralCard site={this.state.site} />}
                 </div>
               </div>
             ) : (
