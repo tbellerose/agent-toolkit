@@ -30,3 +30,10 @@ test('should correctly render ManageSite with database card', () => {
   }));
   expect(wrapper).toMatchSnapshot();
 });
+
+test('should correctly render ManageSite with connection card', () => {
+  wrapper.setState(() => ({
+    activeItem: 'ssh/sftp'
+  }));
+  expect(wrapper).toMatchSnapshot();
+});
