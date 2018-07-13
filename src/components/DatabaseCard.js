@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import config from '../../app.config';
+import callAPI from '../utils/api';
 
 export class DatabaseCard extends Component {
   state = {
@@ -8,23 +8,28 @@ export class DatabaseCard extends Component {
     fqdn: '',
     port: undefined,
     adminUsername: '',
-    adminPassword: ''
+    adminPassword: '',
+    error: ''
   };
 
   getDatabaseInfo = async () => {
     const siteId = this.props.site.id;
-    const response = await fetch(`${config.api_uri}/sites/${siteId}/database`, {
-      headers: {
-        'Authorization': `sso-jwt ${this.props.authToken}`
-      }
-    });
-    const { name, fqdn, port, adminUsername, adminPassword } = await response.json();
+    const {
+      name,
+      fqdn,
+      port,
+      adminUsername,
+      adminPassword,
+      error
+    } = await callAPI(`/sites/${siteId}/database`, this.props.authToken);
+
     this.setState(() => ({
       name,
       fqdn,
       port,
       adminUsername,
-      adminPassword
+      adminPassword,
+      error
     }));
   };
 
@@ -36,18 +41,28 @@ export class DatabaseCard extends Component {
     const { name, fqdn, port, adminPassword, adminUsername } = this.state;
     return (
       <div className="card">
-        <h3 className="card__title">Database Info</h3>
-        <div className="card__content">
-          <p>DB Name: {name}</p>
-          <p>FQDN: {fqdn}</p>
-          <p>Port: {port}</p>
-          <p>Username: {adminUsername}</p>
-          <p>Password: {adminPassword}</p>
-        </div>
-        <div className="card__action">
-          <button className="button">Reset Password</button>
-          <button className="button">Kill Connections</button>
-        </div>
+        {!!this.state.error
+          ? (
+            <div className="card__content">
+              <p>{this.state.error}</p>
+            </div>
+          ) : (
+            <div>
+              <h3 className="card__title">Database Info</h3>
+              <div className="card__content">
+                <p>DB Name: {name}</p>
+                <p>FQDN: {fqdn}</p>
+                <p>Port: {port}</p>
+                <p>Username: {adminUsername}</p>
+                <p>Password: {adminPassword}</p>
+              </div>
+              <div className="card__action">
+                <button className="button">Reset Password</button>
+                <button className="button">Kill Connections</button>
+              </div>
+            </div>
+          )
+        }
       </div>
     );
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import "isomorphic-fetch";
 import { ManageSite } from '../../components/ManageSite';
 import sites from '../fixtures/sites'
 
@@ -34,6 +35,13 @@ test('should correctly render ManageSite with database card', () => {
 test('should correctly render ManageSite with connection card', () => {
   wrapper.setState(() => ({
     activeItem: 'ssh/sftp'
+  }));
+  expect(wrapper).toMatchSnapshot();
+});
+
+test('should correctly render ManageSite with error', () => {
+  wrapper.setState(() => ({
+    error: 'test error'
   }));
   expect(wrapper).toMatchSnapshot();
 });
