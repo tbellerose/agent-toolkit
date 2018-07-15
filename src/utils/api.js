@@ -8,7 +8,8 @@ export const getAPI = async (endpoint, authToken) => {
       }
     });
     if (response.status !== 200) {
-      throw new Error(response.statusText);
+      const error = await response.json();
+      throw new Error(error.id);
     }
     return response.json();
   } catch (e) {
