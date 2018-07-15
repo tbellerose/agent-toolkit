@@ -7,6 +7,7 @@ import SiteMenu from './SiteMenu';
 import GeneralCard from './GeneralCard';
 import DatabaseCard from './DatabaseCard';
 import ConnectionCard from './ConnectionCard';
+import CertificateCard from './CertificateCard';
 
 export class ManageSite extends Component {
   state = {
@@ -55,6 +56,8 @@ export class ManageSite extends Component {
                         return <DatabaseCard site={this.state.site} />;
                       case 'ssh/sftp':
                         return <ConnectionCard site={this.state.site} />;
+                      case 'certificate':
+                        return <CertificateCard site={this.state.site} />;
                       default:
                         return null;
                     }
