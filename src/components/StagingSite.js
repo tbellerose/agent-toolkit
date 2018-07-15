@@ -8,7 +8,8 @@ import ConnectionCard from './ConnectionCard';
 export class StagingSite extends Component {
   state = {
     stagingSite: {},
-    error: ''
+    error: '',
+    ready: false
   };
 
   getStagingSite = async () => {
@@ -18,11 +19,13 @@ export class StagingSite extends Component {
       const stagingSite = await getAPI(`/sites/${stagingSiteId}`, authToken);
       this.setState(() => ({
         stagingSite,
-        error: stagingSite.error
+        error: stagingSite.error,
+        ready: true
       }));
     } else {
       this.setState(() => ({
-        error: 'No active staging site'
+        error: 'No active staging site',
+        ready: true
       }));
     }
   };
@@ -32,7 +35,7 @@ export class StagingSite extends Component {
   };
 
   render() {
-    const { stagingSite, error } = this.state;
+    const { stagingSite, error, ready } = this.state;
     return (
       <div>
         {!!error
@@ -44,7 +47,7 @@ export class StagingSite extends Component {
             </div>
           ) : (
             <div>
-              {stagingSite.id &&
+              {ready &&
                 <div>
                   <GeneralCard site={stagingSite} />
                   <DatabaseCard site={stagingSite} />

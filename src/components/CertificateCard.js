@@ -8,7 +8,8 @@ export class CertificateCard extends Component {
     domain: '',
     expireDate: undefined,
     status: '',
-    error: ''
+    error: '',
+    ready: false
   };
 
   getCertificateInfo = async () => {
@@ -21,7 +22,8 @@ export class CertificateCard extends Component {
       domain,
       expireDate,
       status,
-      error
+      error,
+      ready: true
     }));
   };
 
@@ -30,22 +32,27 @@ export class CertificateCard extends Component {
   };
 
   render() {
+    const { domain, expireDate, status, error, ready } = this.state;
     return (
       <div className="card">
-        {!!this.state.error
-          ? <div className="card__content">{this.state.error}</div>
+        {!!error
+          ? <div className="card__content">{error}</div>
           : (
             <div>
-              <h3 className="card__title">Certificate Info</h3>
-              <div className="card__content">
-                <p>Domain: {this.state.domain}</p>
-                <p>Status: {this.state.status === "Active"
-                  ? <span className="green">{this.state.status}</span>
-                  : <span className="red">{this.state.status}</span>
-                }
-                </p>
-                <p>Exp. Date: {moment(this.state.expireDate).format('MM Do, YYYY')}</p>
-              </div>
+              {ready &&
+                <div>
+                  <h3 className="card__title">Certificate Info</h3>
+                  <div className="card__content">
+                    <p>Domain: {domain}</p>
+                    <p>Status: {status === "Active"
+                      ? <span className="green">{status}</span>
+                      : <span className="red">{status}</span>
+                    }
+                    </p>
+                    <p>Exp. Date: {moment(expireDate).format('MM Do, YYYY')}</p>
+                  </div>
+                </div>
+              }
             </div>
           )
         }
