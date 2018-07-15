@@ -8,6 +8,7 @@ import GeneralCard from './GeneralCard';
 import DatabaseCard from './DatabaseCard';
 import ConnectionCard from './ConnectionCard';
 import CertificateCard from './CertificateCard';
+import StagingSite from './StagingSite';
 
 export class ManageSite extends Component {
   state = {
@@ -58,6 +59,8 @@ export class ManageSite extends Component {
                         return <ConnectionCard site={this.state.site} />;
                       case 'certificate':
                         return <CertificateCard site={this.state.site} />;
+                      case 'staging':
+                        return <StagingSite site={this.state.site} />;
                       default:
                         return null;
                     }
