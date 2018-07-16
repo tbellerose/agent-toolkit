@@ -12,7 +12,8 @@ beforeEach(() => {
     domain: 'test.com',
     status: 'Active',
     expireDate: moment(0),
-    error: ''
+    error: '',
+    ready: true
   }));
 });
 

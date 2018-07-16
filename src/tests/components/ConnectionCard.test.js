@@ -10,7 +10,8 @@ beforeEach(() => {
   wrapper.setState(() => ({
     hostname: 'test',
     port: 1234,
-    status: 'Active'
+    status: 'Active',
+    ready: true
   }));
 });
 
