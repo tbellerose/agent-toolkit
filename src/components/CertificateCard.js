@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { getAPI } from '../utils/api';
 
-export class ConnectionCard extends Component {
+export class CertificateCard extends Component {
   state = {
-    hostname: '',
-    port: undefined,
+    domain: '',
+    expireDate: undefined,
     status: '',
     error: '',
     ready: false
   };
 
-  getConnectionInfo = async () => {
+  getCertificateInfo = async () => {
     const { authToken, site } = this.props;
-    const { hostname, port, status, error } = await getAPI(
-      `/support/sites/${site.id}/ssh`,
+    const { domain, expireDate, status, error } = await getAPI(
+      `/sites/${site.id}/certificates`,
       authToken
     );
     this.setState(() => ({
-      hostname,
-      port,
+      domain,
+      expireDate,
       status,
       error,
       ready: true
@@ -27,11 +28,11 @@ export class ConnectionCard extends Component {
   };
 
   componentDidMount() {
-    this.getConnectionInfo();
-  }
+    this.getCertificateInfo();
+  };
 
   render() {
-    const { hostname, port, status, error, ready } = this.state;
+    const { domain, expireDate, status, error, ready } = this.state;
     return (
       <div className="card">
         {!!error
@@ -40,19 +41,15 @@ export class ConnectionCard extends Component {
             <div>
               {ready &&
                 <div>
-                  <h3 className="card__title">SSH/SFTP Info</h3>
+                  <h3 className="card__title">Certificate Info</h3>
                   <div className="card__content">
-                    <p>Host: {hostname}</p>
-                    <p>Port: {port}</p>
-                    <p>Status: {this.state.status === 'active'
+                    <p>Domain: {domain}</p>
+                    <p>Status: {status === "Active"
                       ? <span className="green">{status}</span>
                       : <span className="red">{status}</span>
                     }
                     </p>
-                  </div>
-                  <div className="card__action">
-                    <button className="button">Create User</button>
-                    <button className="button">Reset Permissions</button>
+                    <p>Exp. Date: {moment(expireDate).format('MM Do, YYYY')}</p>
                   </div>
                 </div>
               }
@@ -68,4 +65,4 @@ const mapStateToProps = (state) => ({
   authToken: state.auth.token
 });
 
-export default connect(mapStateToProps)(ConnectionCard);
+export default connect(mapStateToProps)(CertificateCard);

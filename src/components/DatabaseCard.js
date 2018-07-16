@@ -9,7 +9,8 @@ export class DatabaseCard extends Component {
     port: undefined,
     adminUsername: '',
     adminPassword: '',
-    error: ''
+    error: '',
+    ready: false
   };
 
   getDatabaseInfo = async () => {
@@ -29,7 +30,8 @@ export class DatabaseCard extends Component {
       port,
       adminUsername,
       adminPassword,
-      error
+      error,
+      ready: true
     }));
   };
 
@@ -38,7 +40,7 @@ export class DatabaseCard extends Component {
   }
 
   render() {
-    const { name, fqdn, port, adminPassword, adminUsername } = this.state;
+    const { name, fqdn, port, adminPassword, adminUsername, ready } = this.state;
     return (
       <div className="card">
         {!!this.state.error
@@ -48,18 +50,22 @@ export class DatabaseCard extends Component {
             </div>
           ) : (
             <div>
-              <h3 className="card__title">Database Info</h3>
-              <div className="card__content">
-                <p>DB Name: {name}</p>
-                <p>FQDN: {fqdn}</p>
-                <p>Port: {port}</p>
-                <p>Username: {adminUsername}</p>
-                <p>Password: {adminPassword}</p>
-              </div>
-              <div className="card__action">
-                <button className="button">Reset Password</button>
-                <button className="button">Kill Connections</button>
-              </div>
+              {ready &&
+                <div>
+                  <h3 className="card__title">Database Info</h3>
+                  <div className="card__content">
+                    <p>DB Name: {name}</p>
+                    <p>FQDN: {fqdn}</p>
+                    <p>Port: {port}</p>
+                    <p>Username: {adminUsername}</p>
+                    <p>Password: {adminPassword}</p>
+                  </div>
+                  <div className="card__action">
+                    <button className="button">Reset Password</button>
+                    <button className="button">Kill Connections</button>
+                  </div>
+                </div>
+              }
             </div>
           )
         }

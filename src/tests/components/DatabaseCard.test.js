@@ -12,7 +12,8 @@ beforeEach(() => {
     fqdn: '123.45.678.90',
     port: '1111',
     adminUsername: 'testuser',
-    adminPassword: '@test123'
+    adminPassword: '@test123',
+    ready: true
   }));
 });
 

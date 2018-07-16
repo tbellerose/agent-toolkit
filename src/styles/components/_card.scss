@@ -1,7 +1,9 @@
 .card {
+    background: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    margin-bottom: $m-size;
     @include shadow-4dp();
 }
 

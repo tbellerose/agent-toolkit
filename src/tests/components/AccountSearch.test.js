@@ -9,6 +9,7 @@ beforeEach(() => {
     setToken: jest.fn(),
     clearToken: jest.fn(),
     clearSites: jest.fn(),
+    startSetSites: jest.fn(),
     authToken: ''
   };
   wrapper = shallow(<AccountSearch {...props} />);
