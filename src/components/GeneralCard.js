@@ -32,10 +32,6 @@ export class GeneralCard extends Component {
     }));
   };
 
-  componentDidMount() {
-    this.handleSiteChecks();
-  }
-
   render() {
     const { site } = this.props;
     return (
@@ -65,6 +61,7 @@ export class GeneralCard extends Component {
         <div className="card__action">
           <button className="button">Redeploy Pods</button>
           <button className="button">Flush Cache</button>
+          <button className="button" onClick={this.handleSiteChecks}>Site Checks</button>
           <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
         <EscalationModal
