@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EscalationForm } from '../../components/EscalationForm';
-import sites from '../fixtures/sites';
+import sites, { siteChecks } from '../fixtures/sites';
 
 let wrapper;
 
@@ -16,7 +16,8 @@ test('should correctly render EscalationForm before submitted', () => {
 test('should correctly render EscalationForm after submitted', () => {
   wrapper.setState(() => ({
     details: 'test',
-    submitted: true
+    submitted: true,
+    siteChecks: siteChecks
   }));
   expect(wrapper).toMatchSnapshot();
 });
