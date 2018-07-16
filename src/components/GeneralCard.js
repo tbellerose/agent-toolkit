@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import EscalationModal from './EscalationModal';
+import checkSite from '../utils/siteCheck';
+import siteCheck from '../utils/siteCheck';
 
 export class GeneralCard extends Component {
   state = {
-    modalIsOpen: false
+    modalIsOpen: false,
+    siteChecks: undefined
   };
 
   handleEscalation = () => {
@@ -13,6 +16,25 @@ export class GeneralCard extends Component {
   handleCloseModal = () => {
     this.setState(() => ({ modalIsOpen: false }));
   };
+
+  handleSiteChecks = async () => {
+    const { name: primaryDomain } = this.props.site.domains.primary;
+    const { name: defaultDomain } = this.props.site.domains.default;
+    let urls = [];
+    if (primaryDomain === defaultDomain) {
+      urls.push(primaryDomain);
+    } else {
+      urls.push(primaryDomain, defaultDomain);
+    }
+    const siteChecks = await checkSite(urls);
+    this.setState(() => ({
+      siteChecks
+    }));
+  };
+
+  componentDidMount() {
+    this.handleSiteChecks();
+  }
 
   render() {
     const { site } = this.props;
@@ -34,11 +56,15 @@ export class GeneralCard extends Component {
           <p>WP Version: {site.version.wordPress}</p>
           <p>PHP Version: {site.version.php}</p>
           <p>Cluster: {site.clusterId}</p>
+          {this.state.siteChecks &&
+            this.state.siteChecks.map((siteCheck, i) => (
+              <p key={i}>{siteCheck}</p>
+            ))
+          }
         </div>
         <div className="card__action">
           <button className="button">Redeploy Pods</button>
           <button className="button">Flush Cache</button>
-          <button className="button">Site Checks</button>
           <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
         <EscalationModal
