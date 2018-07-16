@@ -1,5 +1,41 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin-bottom: $s-size;
+    }
+    > button {
+        align-self: center;
+    }
+}
+
+.form__group {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.form__label {
+    align-self: flex-start;
+    flex-grow: 1;
+    font-size: $font-size-large;
+    margin-right: $s-size;
+}
+
+.form__output {
+    p {
+        margin: 0;
+        padding: $s-size / 2;
+    }
+}
+
 .form__error {
     font-style: italic;
     margin: $s-size auto 0 auto;
     text-align: center;
+}
+
+.form__error--under {
+    @extend .form__error;
+    margin: 0 auto $s-size auto;
 }

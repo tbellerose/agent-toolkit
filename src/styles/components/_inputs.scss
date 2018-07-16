@@ -7,3 +7,8 @@
     margin-right: $s-size;
     width: 40rem;
 }
+
+.textarea {
+    @extend .text-input;
+    height: 10rem;
+}

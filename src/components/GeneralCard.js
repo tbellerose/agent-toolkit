@@ -41,7 +41,11 @@ export class GeneralCard extends Component {
           <button className="button">Site Checks</button>
           <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
-        <EscalationModal modalIsOpen={this.state.modalIsOpen} handleCloseModal={this.handleCloseModal} />
+        <EscalationModal
+          modalIsOpen={this.state.modalIsOpen}
+          handleCloseModal={this.handleCloseModal}
+          site={site}
+        />
       </div>
     );
   };
