@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#app');
+if (process.env.NODE_ENV !== 'test') {
+  Modal.setAppElement('#app');
+}
 
 export class EscalationModal extends Component {
   render() {

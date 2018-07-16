@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "webpack",
     "dev-server": "webpack-dev-server --mode development",
-    "test": "jest --config=jest.config.json",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js"
   },
   "author": "Tyler Bellerose",
@@ -21,6 +21,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
