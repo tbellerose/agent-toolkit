@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
+import EscalationModal from './EscalationModal';
 
 export class GeneralCard extends Component {
+  state = {
+    modalIsOpen: false
+  };
+
+  handleEscalation = () => {
+    this.setState(() => ({ modalIsOpen: true }));
+  };
+
+  handleCloseModal = () => {
+    this.setState(() => ({ modalIsOpen: false }));
+  };
+
   render() {
     const { site } = this.props;
     return (
@@ -26,8 +39,9 @@ export class GeneralCard extends Component {
           <button className="button">Redeploy Pods</button>
           <button className="button">Flush Cache</button>
           <button className="button">Site Checks</button>
-          <button className="button">Escalate</button>
+          <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
+        <EscalationModal modalIsOpen={this.state.modalIsOpen} handleCloseModal={this.handleCloseModal} />
       </div>
     );
   };
