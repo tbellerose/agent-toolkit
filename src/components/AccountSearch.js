@@ -9,14 +9,14 @@ export class AccountSearch extends Component {
     authToken: this.props.authToken
   };
 
-  onAuthTokenChange = (e) => {
+  handleAuthTokenChange = (e) => {
     let authToken = e.target.value;
     this.setState(() => ({
       authToken
     }));
   };
 
-  onSearch = async () => {
+  handleSearch = async () => {
     if (!this.state.authToken) {
       this.setState(() => ({
         error: 'Please provide an auth token'
@@ -36,7 +36,7 @@ export class AccountSearch extends Component {
     }
   };
 
-  onClear = () => {
+  handleClear = () => {
     this.setState(() => ({
       authToken: ''
     }));
@@ -55,12 +55,12 @@ export class AccountSearch extends Component {
             className="text-input"
             type="text"
             value={this.state.authToken}
-            onChange={this.onAuthTokenChange}
+            onChange={this.handleAuthTokenChange}
             placeholder="SSO Token"
             autoFocus
           />
-          <button className="button" onClick={this.onSearch}>Search</button>
-          <button className="button" onClick={this.onClear}>Clear</button>
+          <button className="button" onClick={this.handleSearch}>Search</button>
+          <button className="button" onClick={this.handleClear}>Clear</button>
         </div>
         {!!this.state.error &&
           <p className="form__error">{this.state.error}</p>
