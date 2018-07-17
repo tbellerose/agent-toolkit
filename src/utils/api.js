@@ -17,7 +17,7 @@ export const getAPI = async (endpoint, authToken) => {
   }
 };
 
-export const deleteAPI = async (endpoint, authToken, body) => {
+export const deleteAPI = async (endpoint, authToken) => {
   try {
     const response = await fetch(`${config.api_uri}${endpoint}`, {
       method: 'DELETE',
@@ -25,6 +25,26 @@ export const deleteAPI = async (endpoint, authToken, body) => {
         'Authorization': `sso-jwt ${authToken}`,
         'Content-Type': 'application/json'
       }
+    });
+    if (response.status !== 204) {
+      const error = await response.json();
+      throw new Error(error.id);
+    }
+    return response;
+  } catch (e) {
+    return { error: e.message };
+  }
+};
+
+export const postAPI = async (endpoint, authToken, body = {}) => {
+  try {
+    const response = await fetch(`${config.api_uri}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `sso-jwt ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body
     });
     if (response.status !== 204) {
       const error = await response.json();
