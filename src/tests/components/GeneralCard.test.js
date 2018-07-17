@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sites, { siteChecks } from '../fixtures/sites'
-import GeneralCard from '../../components/GeneralCard';
+import { GeneralCard } from '../../components/GeneralCard';
 
 let wrapper;
 
