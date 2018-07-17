@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EscalationModal from './EscalationModal';
+import MessageModal from './MessageModal';
 import checkSite from '../utils/siteCheck';
 import { deleteAPI } from '../utils/api';
 
 export class GeneralCard extends Component {
   state = {
-    modalIsOpen: false,
+    displayEscalationModal: false,
+    displayMessageModal: false,
+    messageModalText: '',
     siteChecks: undefined,
-    error: ''
   };
 
   handleEscalation = () => {
-    this.setState(() => ({ modalIsOpen: true }));
+    this.setState(() => ({ displayEscalationModal: true }));
   };
 
-  handleCloseModal = () => {
-    this.setState(() => ({ modalIsOpen: false }));
+  handleCloseEscalationModal = () => {
+    this.setState(() => ({ displayEscalationModal: false }));
+  };
+
+  handleCloseMessageModal = () => {
+    this.setState(() => ({ displayMessageModal: false }));
   };
 
   handleFlushCache = async () => {
-    const error = await deleteAPI(
+    const { name: primaryDomain } = this.props.site.domains.primary;
+    const { error } = await deleteAPI(
       `/sites/${this.props.site.id}/cache`,
       this.props.authToken
     );
-    this.setState(() => {
-      error
-    });
+    if (error) {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: `There was a problem flushing the cache for ${primaryDomain}`
+      }));
+    } else {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: `Cache for ${primaryDomain} successfully flushed`
+      }));
+    }
   };
 
   handleSiteChecks = async () => {
@@ -77,9 +92,14 @@ export class GeneralCard extends Component {
           <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
         <EscalationModal
-          modalIsOpen={this.state.modalIsOpen}
-          handleCloseModal={this.handleCloseModal}
+          modalIsOpen={this.state.displayEscalationModal}
+          handleCloseModal={this.handleCloseEscalationModal}
           site={site}
+        />
+        <MessageModal
+          modalIsOpen={this.state.displayMessageModal}
+          handleCloseModal={this.handleCloseMessageModal}
+          message={this.state.messageModalText}
         />
       </div>
     );
