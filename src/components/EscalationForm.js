@@ -57,9 +57,10 @@ export class EscalationForm extends Component {
       defaultDomain: this.state.defaultDomain,
       details: this.state.details
     });
-    await submitToSlack(text);
+    const error = await submitToSlack(text);
     this.setState(() => ({
-      submittedToSlack: true
+      submittedToSlack: true,
+      error
     }));
   };
 
@@ -98,6 +99,14 @@ export class EscalationForm extends Component {
               >
                 Submit to Slack
               </button>
+              {error
+                ? <p className="form__error">{error}</p>
+                : (
+                  <p className="form__error">
+                    {submittedToSlack && 'Issue submitted'}
+                  </p>
+                )
+              }
             </div>
           ) : (
             <form className="form">

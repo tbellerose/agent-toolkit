@@ -1,10 +1,13 @@
 import config from '../../app.config';
 
-export const submitToSlack = (text) => {
-  fetch(config.slack_webhook, {
+export const submitToSlack = async (text) => {
+  const response = await fetch(config.slack_webhook, {
     method: 'POST',
     body: JSON.stringify({ text })
   });
+  if (response.status !== 200) {
+    return 'There was an error submitting to Slack';
+  }
 };
 
 export const formatForSlack = ({
