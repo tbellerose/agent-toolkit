@@ -11,7 +11,6 @@ export class GeneralCard extends Component {
     displayMessageModal: false,
     messageModalText: '',
     siteChecks: undefined,
-    error: ''
   };
 
   handleEscalation = () => {
@@ -31,14 +30,16 @@ export class GeneralCard extends Component {
       `/sites/${this.props.site.id}/cache`,
       this.props.authToken
     );
+    const { name: primaryDomain } = this.props.site.domains.primary;
     if (error) {
       this.setState(() => ({
-        error
+        displayMessageModal: true,
+        messageModalText: `There was a problem flushing the cache for ${primaryDomain}`
       }));
     } else {
       this.setState(() => ({
         displayMessageModal: true,
-        messageModalText: `Cache for ${this.props.site.domains.primary.name} successfully flushed`
+        messageModalText: `Cache for ${primaryDomain} successfully flushed`
       }));
     }
   };

@@ -12,6 +12,12 @@ beforeEach(() => {
       siteChecks
     }));
   };
+  wrapper.instance.handleFlushCache = () => {
+    wrapper.setState(() => ({
+      displayMessageModal: true,
+      messageModalText: 'Test'
+    }));
+  }
 });
 
 test('should correctly render GeneralCard', () => {
@@ -24,12 +30,17 @@ test('should correctly render site checks', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('should set modalIsOpen to true', () => {
+test('should set displayEscalationModal to true', () => {
   wrapper.find('button').at(3).simulate('click');
-  expect(wrapper.state('modalIsOpen')).toBe(true);
+  expect(wrapper.state('displayEscalationModal')).toBe(true);
 });
 
-test('should set modalIsOpen to false', () => {
-  wrapper.instance().handleCloseModal();
-  expect(wrapper.state('modalIsOpen')).toBe(false);
-})
+test('should set displayEscalationModal to false', () => {
+  wrapper.instance().handleCloseEscalationModal();
+  expect(wrapper.state('displayEscalationModal')).toBe(false);
+});
+
+test('should set displayMessageModal to true', async () => {
+  await wrapper.find('button').at(1).simulate('click');
+  expect(wrapper.state('displayMessageModal')).toBe(true);
+});
