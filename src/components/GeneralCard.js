@@ -26,11 +26,11 @@ export class GeneralCard extends Component {
   };
 
   handleFlushCache = async () => {
+    const { name: primaryDomain } = this.props.site.domains.primary;
     const { error } = await deleteAPI(
       `/sites/${this.props.site.id}/cache`,
       this.props.authToken
     );
-    const { name: primaryDomain } = this.props.site.domains.primary;
     if (error) {
       this.setState(() => ({
         displayMessageModal: true,
