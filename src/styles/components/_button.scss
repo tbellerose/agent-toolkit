@@ -10,6 +10,9 @@
     min-width: 10rem;
     padding: $s-size;
     text-decoration: none;
+    &:disabled {
+        opacity: .20;
+    }
 }
 
 .button--link {

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import EscalationModal from './EscalationModal';
 import checkSite from '../utils/siteCheck';
-import siteCheck from '../utils/siteCheck';
+import { deleteAPI } from '../utils/api';
 
 export class GeneralCard extends Component {
   state = {
     modalIsOpen: false,
-    siteChecks: undefined
+    siteChecks: undefined,
+    error: ''
   };
 
   handleEscalation = () => {
@@ -15,6 +17,16 @@ export class GeneralCard extends Component {
 
   handleCloseModal = () => {
     this.setState(() => ({ modalIsOpen: false }));
+  };
+
+  handleFlushCache = async () => {
+    const error = await deleteAPI(
+      `/sites/${this.props.site.id}/cache`,
+      this.props.authToken
+    );
+    this.setState(() => {
+      error
+    });
   };
 
   handleSiteChecks = async () => {
@@ -60,7 +72,7 @@ export class GeneralCard extends Component {
         </div>
         <div className="card__action">
           <button className="button">Redeploy Pods</button>
-          <button className="button">Flush Cache</button>
+          <button className="button" onClick={this.handleFlushCache}>Flush Cache</button>
           <button className="button" onClick={this.handleSiteChecks}>Site Checks</button>
           <button className="button" onClick={this.handleEscalation}>Escalate</button>
         </div>
@@ -74,4 +86,8 @@ export class GeneralCard extends Component {
   };
 };
 
-export default GeneralCard;
+const mapStateToProps = (state) => ({
+  authToken: state.auth.token
+});
+
+export default connect(mapStateToProps)(GeneralCard);
