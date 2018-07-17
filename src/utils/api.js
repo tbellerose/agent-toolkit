@@ -26,11 +26,11 @@ export const deleteAPI = async (endpoint, authToken, body) => {
         'Content-Type': 'application/json'
       }
     });
-    if (response.status !== 200) {
+    if (response.status !== 204) {
       const error = await response.json();
       throw new Error(error.id);
     }
-    return response.json();
+    return response;
   } catch (e) {
     return { error: e.message };
   }

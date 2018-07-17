@@ -25,6 +25,19 @@
     @include shadow-4dp();
 }
 
+.modal--message__overlay {
+    background: $dark-grey;
+    border-radius: 5px;
+    color: white;
+    font-size: $font-size-large;
+    padding: $s-size;
+    position: absolute;
+    right: $s-size;
+    top: $s-size;
+    width: auto;
+    @include shadow-4dp();
+}
+
 .modal__title {
     font-weight: 300;
 }
