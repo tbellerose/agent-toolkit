@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import checkSites from '../utils/siteCheck';
+import { submitToSlack, formatForSlack } from '../utils/slack';
 
 export class EscalationForm extends Component {
   state = {
@@ -9,6 +10,7 @@ export class EscalationForm extends Component {
     siteChecks: undefined,
     details: '',
     submitted: false,
+    submittedToSlack: false,
     error: ''
   };
 
@@ -48,6 +50,19 @@ export class EscalationForm extends Component {
     }
   };
 
+  handleSlackSubmit = async () => {
+    const text = formatForSlack({
+      siteId: this.state.siteId,
+      primaryDomain: this.state.primaryDomain,
+      defaultDomain: this.state.defaultDomain,
+      details: this.state.details
+    });
+    await submitToSlack(text);
+    this.setState(() => ({
+      submittedToSlack: true
+    }));
+  };
+
   render() {
     const {
       siteId,
@@ -56,6 +71,7 @@ export class EscalationForm extends Component {
       details,
       siteChecks,
       submitted,
+      submittedToSlack,
       error
     } = this.state;
 
@@ -75,6 +91,13 @@ export class EscalationForm extends Component {
                   <p key={i}>{siteCheck}</p>
                 ))
               }
+              <button
+                className="button"
+                onClick={this.handleSlackSubmit}
+                disabled={submittedToSlack}
+              >
+                Submit to Slack
+              </button>
             </div>
           ) : (
             <form className="form">
