@@ -8,6 +8,6 @@ async function checkAuthentication() {
       this.setState(() => ({ authenticated }));
     }
   }
-};
+}
 
 export { checkAuthentication };

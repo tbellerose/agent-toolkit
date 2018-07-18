@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setToken, clearToken } from '../actions/auth';
 import { startSetSites, clearSites } from '../actions/sites';
@@ -10,7 +11,7 @@ export class AccountSearch extends Component {
   };
 
   handleAuthTokenChange = (e) => {
-    let authToken = e.target.value;
+    const authToken = e.target.value;
     this.setState(() => ({
       authToken
     }));
@@ -49,25 +50,34 @@ export class AccountSearch extends Component {
 
   render() {
     return (
-      <div className="page-header">
-        <div className="page-header__content">
+      <div className='page-header'>
+        <div className='page-header__content'>
           <input
-            className="text-input"
-            type="text"
-            value={this.state.authToken}
-            onChange={this.handleAuthTokenChange}
-            placeholder="SSO Token"
+            className='text-input'
+            type='text'
+            value={ this.state.authToken }
+            onChange={ this.handleAuthTokenChange }
+            placeholder='SSO Token'
             autoFocus
           />
-          <button className="button" onClick={this.handleSearch}>Search</button>
-          <button className="button" onClick={this.handleClear}>Clear</button>
+          <button className='button' onClick={ this.handleSearch }>Search</button>
+          <button className='button' onClick={ this.handleClear }>Clear</button>
         </div>
         {!!this.state.error &&
-          <p className="form__error">{this.state.error}</p>
+          <p className='form__error'>{this.state.error}</p>
         }
       </div>
     );
-  };
+  }
+}
+
+AccountSearch.propTypes = {
+  authToken: PropTypes.string,
+  sites: PropTypes.array,
+  setToken: PropTypes.func,
+  clearToken: PropTypes.func,
+  startSetSites: PropTypes.func,
+  clearSites: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

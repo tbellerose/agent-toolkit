@@ -6,7 +6,7 @@ import sites from '../fixtures/sites';
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<DatabaseCard site={sites[0]} />);
+  wrapper = shallow(<DatabaseCard site={ sites[0] } />);
   wrapper.setState(() => ({
     database: {
       name: 'test',

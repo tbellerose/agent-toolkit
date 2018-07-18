@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getAPI } from '../utils/api';
@@ -37,7 +38,7 @@ export class ManageSite extends Component {
 
   componentDidMount() {
     this.getSite();
-  };
+  }
 
   componentDidUpdate() {
     this.getSite();
@@ -47,27 +48,27 @@ export class ManageSite extends Component {
     return (
       <div>
         <Header />
-        <div className="content-container">
+        <div className='content-container'>
           {this.state.site
-            ? <div className="split-layout">
-              <div className="split-layout__left">
-                <SiteMenu handleItemClick={this.handleItemClick} />
+            ? <div className='split-layout'>
+              <div className='split-layout__left'>
+                <SiteMenu handleItemClick={ this.handleItemClick } />
               </div>
-              <div className="split-layout__right">
-                {!!this.state.error
-                  ? <div className="card">{this.state.error}</div>
+              <div className='split-layout__right'>
+                {this.state.error
+                  ? <div className='card'>{this.state.error}</div>
                   : (() => {
                     switch (this.state.activeItem) {
                       case 'general':
-                        return <GeneralCard site={this.state.site} />;
+                        return <GeneralCard site={ this.state.site } />;
                       case 'database':
-                        return <DatabaseCard site={this.state.site} />;
+                        return <DatabaseCard site={ this.state.site } />;
                       case 'ssh/sftp':
-                        return <ConnectionCard site={this.state.site} />;
+                        return <ConnectionCard site={ this.state.site } />;
                       case 'certificate':
-                        return <CertificateCard site={this.state.site} />;
+                        return <CertificateCard site={ this.state.site } />;
                       case 'staging':
-                        return <StagingSite site={this.state.site} />;
+                        return <StagingSite site={ this.state.site } />;
                       default:
                         return null;
                     }
@@ -80,7 +81,12 @@ export class ManageSite extends Component {
         </div>
       </div>
     );
-  };
+  }
+}
+
+ManageSite.propTypes = {
+  match: PropTypes.object,
+  authToken: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({

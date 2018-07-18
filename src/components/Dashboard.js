@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
-import { setUser, clearUser } from '../actions/auth';
+import { setUser } from '../actions/auth';
 import Header from './Header';
 import AccountSearch from './AccountSearch';
 import LoadingPage from './LoadingPage';
@@ -19,7 +20,7 @@ export class Dashboard extends Component {
       this.props.history.push('/');
     }
     this.props.setUser(this.state.userinfo);
-  };
+  }
 
   render() {
     return (
@@ -28,7 +29,7 @@ export class Dashboard extends Component {
           ? (
             <div>
               <Header />
-              <div className="content-container">
+              <div className='content-container'>
                 <AccountSearch />
                 <SiteList />
               </div>
@@ -39,11 +40,16 @@ export class Dashboard extends Component {
         }
       </div>
     );
-  };
+  }
+}
+
+Dashboard.propTypes = {
+  setUser: PropTypes.func,
+  history: PropTypes.object
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setUser: (user) => dispatch(setUser(user))
 });
 
-export default connect(undefined, mapDispatchToProps)(withAuth(Dashboard));
+export default connect(null, mapDispatchToProps)(withAuth(Dashboard));

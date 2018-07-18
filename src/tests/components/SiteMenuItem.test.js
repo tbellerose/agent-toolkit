@@ -10,7 +10,7 @@ beforeEach(() => {
     children: ['test'],
     onClick: jest.fn()
   };
-  wrapper = shallow(<SiteMenuItem {...props} />);
+  wrapper = shallow(<SiteMenuItem { ...props } />);
 });
 
 test('should correctly render SiteMenuItem', () => {

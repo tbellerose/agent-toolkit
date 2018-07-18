@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../utils/auth';
@@ -14,11 +15,11 @@ export class LoginPage extends Component {
 
   async componentDidMount() {
     this.checkAuthentication();
-  };
+  }
 
   async componentDidUpdate() {
     this.checkAuthentication();
-  };
+  }
 
   render() {
     return (
@@ -28,12 +29,12 @@ export class LoginPage extends Component {
           <div>
             {this.state.authenticated
               ? (
-                <Redirect to="/dashboard" />
+                <Redirect to='/dashboard' />
               ) : (
-                <div className="box-layout">
-                  <div className="box-layout__box">
-                    <h1 className="box-layout__title">Agent Toolkit</h1>
-                    <button className="button" onClick={this.login}>Login</button>
+                <div className='box-layout'>
+                  <div className='box-layout__box'>
+                    <h1 className='box-layout__title'>Agent Toolkit</h1>
+                    <button className='button' onClick={ this.login }>Login</button>
                   </div>
                 </div>
               )
@@ -42,7 +43,11 @@ export class LoginPage extends Component {
         }
       </div>
     );
-  };
+  }
+}
+
+LoginPage.propTypes = {
+  auth: PropTypes.object
 };
 
 export default withAuth(LoginPage);

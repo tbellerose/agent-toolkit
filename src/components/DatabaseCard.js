@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getAPI } from '../utils/api';
@@ -10,7 +11,7 @@ export class DatabaseCard extends Component {
     database: {
       name: '',
       fqdn: '',
-      port: undefined,
+      port: null,
       adminUsername: '',
       adminPassword: '',
       error: ''
@@ -62,41 +63,41 @@ export class DatabaseCard extends Component {
 
   componentDidMount() {
     this.getDatabaseInfo();
-  };
+  }
 
   componentDidUpdate() {
     this.getDatabaseInfo();
-  };
+  }
 
   render() {
     const { name, fqdn, port, adminPassword, adminUsername } = this.state.database;
     return (
-      <div className="card">
-        {!!this.state.error
+      <div className='card'>
+        {this.state.error
           ? (
-            <div className="card__content">
+            <div className='card__content'>
               <p>{this.state.error}</p>
             </div>
           ) : (
             <div>
               {this.state.ready &&
                 <div>
-                  <h3 className="card__title">Database Info</h3>
-                  <div className="card__content">
+                  <h3 className='card__title'>Database Info</h3>
+                  <div className='card__content'>
                     <p>DB Name: {name}</p>
                     <p>FQDN: {fqdn}</p>
                     <p>Port: {port}</p>
                     <p>Username: {adminUsername}</p>
                     <p>Password: {adminPassword}</p>
                   </div>
-                  <div className="card__action">
-                    <button className="button" onClick={this.handleResetPassword}>Reset Password</button>
-                    <button className="button">Kill Connections</button>
+                  <div className='card__action'>
+                    <button className='button' onClick={ this.handleResetPassword }>Reset Password</button>
+                    <button className='button'>Kill Connections</button>
                   </div>
                   <MessageModal
-                    modalIsOpen={this.state.displayMessageModal}
-                    handleCloseModal={this.handleCloseMessageModal}
-                    message={this.state.messageModalText}
+                    modalIsOpen={ this.state.displayMessageModal }
+                    handleCloseModal={ this.handleCloseMessageModal }
+                    message={ this.state.messageModalText }
                   />
                 </div>
               }
@@ -105,7 +106,12 @@ export class DatabaseCard extends Component {
         }
       </div>
     );
-  };
+  }
+}
+
+DatabaseCard.propTypes = {
+  authToken: PropTypes.string,
+  site: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

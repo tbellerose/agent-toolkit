@@ -12,7 +12,7 @@ export const startSetSites = () => {
     try {
       const response = await fetch(`${config.api_uri}/sites`, {
         headers: {
-          'Authorization': `sso-jwt ${authToken}`
+          Authorization: `sso-jwt ${authToken}`
         }
       });
       if (response.status !== 200) {

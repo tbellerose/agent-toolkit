@@ -19,13 +19,13 @@ const { store, persistor } = configureStore();
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+      <Provider store={ store }>
+        <PersistGate loading={ null } persistor={ persistor }>
           <AppRouter />
         </PersistGate>
       </Provider>
     );
-  };
-};
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));

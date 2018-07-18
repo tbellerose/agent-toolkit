@@ -20,7 +20,7 @@ export default () => {
   const store = createStore(
     persistedReducer,
     composeEnhancers(applyMiddleware(thunk))
-  )
+  );
   const persistor = persistStore(store);
   return { store, persistor };
 };
