@@ -12,6 +12,7 @@ beforeEach(() => {
       hostname: 'test',
       port: 1234,
       status: 'Active',
+      users: [{ username: 'Test User' }],
       error: ''
     },
     ready: true
