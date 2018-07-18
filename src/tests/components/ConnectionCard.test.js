@@ -8,9 +8,13 @@ let wrapper;
 beforeEach(() => {
   wrapper = shallow(<ConnectionCard site={sites[0]} />);
   wrapper.setState(() => ({
-    hostname: 'test',
-    port: 1234,
-    status: 'Active',
+    connectionInfo: {
+      hostname: 'test',
+      port: 1234,
+      status: 'Active',
+      users: [{ username: 'Test User' }],
+      error: ''
+    },
     ready: true
   }));
 });

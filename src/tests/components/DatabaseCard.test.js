@@ -8,11 +8,14 @@ let wrapper;
 beforeEach(() => {
   wrapper = shallow(<DatabaseCard site={sites[0]} />);
   wrapper.setState(() => ({
-    name: 'test',
-    fqdn: '123.45.678.90',
-    port: '1111',
-    adminUsername: 'testuser',
-    adminPassword: '@test123',
+    database: {
+      name: 'test',
+      fqdn: '123.45.678.90',
+      port: '1111',
+      adminUsername: 'testuser',
+      adminPassword: '@test123',
+      error: ''
+    },
     ready: true
   }));
 });

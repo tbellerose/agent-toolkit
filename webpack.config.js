@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env) => {
   const CSSExtract = new ExtractTextPlugin('styles.css');
+  const isProduction = env === 'production';
 
   return {
     entry: ['babel-polyfill', './src/app.js'],
@@ -39,7 +40,7 @@ module.exports = (env) => {
     plugins: [
       CSSExtract,
     ],
-    devtool: 'inline-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       port: 8080,

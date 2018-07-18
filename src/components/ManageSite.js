@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { getAPI } from '../utils/api';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
@@ -17,24 +18,30 @@ export class ManageSite extends Component {
     error: ''
   };
 
-  getSite = async () => {
-    const siteId = this.props.match.params.siteId;
-    const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
-    this.setState(() => ({
-      site,
-      error: site.error
-    }));
-  };
-
   handleItemClick = (activeItem) => {
     this.setState(() => ({
       activeItem
     }));
   };
 
+  getSite = async () => {
+    const siteId = this.props.match.params.siteId;
+    const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
+    if (!_.isEqual(this.state.site, site)) {
+      this.setState(() => ({
+        site,
+        error: site.error
+      }));
+    }
+  };
+
   componentDidMount() {
     this.getSite();
   };
+
+  componentDidUpdate() {
+    this.getSite();
+  }
 
   render() {
     return (
