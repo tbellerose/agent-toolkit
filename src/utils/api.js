@@ -4,7 +4,7 @@ export const getAPI = async (endpoint, authToken) => {
   try {
     const response = await fetch(`${config.api_uri}${endpoint}`, {
       headers: {
-        'Authorization': `sso-jwt ${authToken}`
+        Authorization: `sso-jwt ${authToken}`
       }
     });
     if (response.status !== 200) {
@@ -48,10 +48,10 @@ export const postAPI = async (endpoint, authToken, body = {}) => {
     });
     if (response.status === 204 || response.status === 200) {
       return response;
-    } else {
-      const error = await response.json();
-      throw new Error(error.id);
     }
+    const error = await response.json();
+    throw new Error(error.id);
+
   } catch (e) {
     return { error: e.message };
   }
@@ -69,11 +69,11 @@ export const patchAPI = async (endpoint, authToken, body = {}) => {
     });
     if (response.status === 204 || response.status === 200) {
       return response;
-    } else {
-      const error = await response.json();
-      throw new Error(error.id);
     }
+    const error = await response.json();
+    throw new Error(error.id);
+
   } catch (e) {
     return { error: e.message };
   }
-}
+};

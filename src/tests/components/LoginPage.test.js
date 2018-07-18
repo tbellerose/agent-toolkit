@@ -9,7 +9,7 @@ beforeEach(() => {
     isAuthenticated: jest.fn(),
     login: jest.fn()
   };
-  wrapper = shallow(<LoginPage auth={auth} />);
+  wrapper = shallow(<LoginPage auth={ auth } />);
   wrapper.instance().checkAuthentication = jest.fn();
   wrapper.setState(() => ({
     authenticated: false

@@ -11,16 +11,16 @@ import config from '../../app.config';
 const AppRouter = () => (
   <Router>
     <Security
-      issuer={config.issuer}
-      client_id={config.client_id}
-      redirect_uri={config.redirect_uri}
+      issuer={ config.issuer }
+      client_id={ config.client_id }
+      redirect_uri={ config.redirect_uri }
     >
       <Switch>
-        <Route path="/" exact={true} component={LoginPage} />
-        <Route path="/implicit/callback" component={ImplicitCallback} />
-        <SecureRoute path="/dashboard" component={Dashboard} />
-        <SecureRoute path="/manage/:siteId" component={ManageSite} />
-        <Route component={NotFoundPage} />
+        <Route path='/' exact={ true } component={ LoginPage } />
+        <Route path='/implicit/callback' component={ ImplicitCallback } />
+        <SecureRoute path='/dashboard' component={ Dashboard } />
+        <SecureRoute path='/manage/:siteId' component={ ManageSite } />
+        <Route component={ NotFoundPage } />
       </Switch>
     </Security>
   </Router>

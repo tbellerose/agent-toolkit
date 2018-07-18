@@ -4,7 +4,7 @@ import { Dashboard } from '../../components/Dashboard';
 import user from '../fixtures/user';
 
 test('should correctly render Dashboard', () => {
-  let wrapper = shallow(<Dashboard />);
+  const wrapper = shallow(<Dashboard />);
   expect(wrapper).toMatchSnapshot();
   wrapper.setState(() => ({ userinfo: user }));
   expect(wrapper).toMatchSnapshot();

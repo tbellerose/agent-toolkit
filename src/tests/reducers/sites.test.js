@@ -11,7 +11,7 @@ test('should set sites', () => {
     type: 'SET_SITES',
     sites
   };
-  const state = sitesReducer(undefined, action);
+  const state = sitesReducer(null, action);
   expect(state).toEqual(action.sites);
 });
 
@@ -20,6 +20,6 @@ test('should clear sites', () => {
   const action = {
     type: 'CLEAR_SITES'
   };
-  state = sitesReducer(undefined, action);
+  state = sitesReducer(null, action);
   expect(state).toEqual([]);
 });

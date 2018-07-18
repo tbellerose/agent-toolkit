@@ -32,16 +32,16 @@ export class StagingSite extends Component {
 
   componentDidMount() {
     this.getStagingSite();
-  };
+  }
 
   render() {
     const { stagingSite, error, ready } = this.state;
     return (
       <div>
-        {!!error
+        {error
           ? (
-            <div className="card">
-              <div className="card__content">
+            <div className='card'>
+              <div className='card__content'>
                 {error}
               </div>
             </div>
@@ -49,9 +49,9 @@ export class StagingSite extends Component {
             <div>
               {ready &&
                 <div>
-                  <GeneralCard site={stagingSite} />
-                  <DatabaseCard site={stagingSite} />
-                  <ConnectionCard site={stagingSite} />
+                  <GeneralCard site={ stagingSite } />
+                  <DatabaseCard site={ stagingSite } />
+                  <ConnectionCard site={ stagingSite } />
                 </div>
               }
             </div>
@@ -59,8 +59,8 @@ export class StagingSite extends Component {
         }
       </div>
     );
-  };
-};
+  }
+}
 
 const mapStateToProps = (state) => ({
   authToken: state.auth.token

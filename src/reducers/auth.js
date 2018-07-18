@@ -12,7 +12,7 @@ export const authReducerDefaultState = {
     updated_at: 0,
     email_verified: false
   }
-}
+};
 
 export default (state = authReducerDefaultState, action) => {
   switch (action.type) {
@@ -30,7 +30,7 @@ export default (state = authReducerDefaultState, action) => {
       return {
         ...state,
         token: action.token
-      }
+      };
     case 'CLEAR_TOKEN':
       return {
         ...state,

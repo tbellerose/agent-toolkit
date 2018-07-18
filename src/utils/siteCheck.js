@@ -5,7 +5,7 @@ const asyncForEach = async (array, callback) => {
 };
 
 export default async (urls) => {
-  let results = [];
+  const results = [];
   await asyncForEach(urls, async (url) => {
     const cacheCheck = await fetch(`https://${url}/__mwp2_check__`);
     const httpdCheck = await fetch(`https://${url}/__mwp2_httpd_check__`);
@@ -15,6 +15,6 @@ export default async (urls) => {
       `${httpdCheck.url}: ${httpdCheck.statusText}`,
       `${phpCheck.url}: ${phpCheck.statusText}`,
     );
-  })
+  });
   return results;
 };

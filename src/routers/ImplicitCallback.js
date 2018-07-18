@@ -40,7 +40,7 @@ export default withAuth(class ImplicitCallback extends Component {
     localStorage.removeItem(referrerKey);
 
     return this.state.authenticated ?
-      <Redirect push={true} to={location} /> :
+      <Redirect push={ true } to={ location } /> :
       <p>{this.state.error}</p>;
   }
 });

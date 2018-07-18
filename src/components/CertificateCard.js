@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getAPI } from '../utils/api';
@@ -6,7 +7,7 @@ import { getAPI } from '../utils/api';
 export class CertificateCard extends Component {
   state = {
     domain: '',
-    expireDate: undefined,
+    expireDate: null,
     status: '',
     error: '',
     ready: false
@@ -29,24 +30,24 @@ export class CertificateCard extends Component {
 
   componentDidMount() {
     this.getCertificateInfo();
-  };
+  }
 
   render() {
     const { domain, expireDate, status, error, ready } = this.state;
     return (
-      <div className="card">
-        {!!error
-          ? <div className="card__content">{error}</div>
+      <div className='card'>
+        {error
+          ? <div className='card__content'>{error}</div>
           : (
             <div>
               {ready &&
                 <div>
-                  <h3 className="card__title">Certificate Info</h3>
-                  <div className="card__content">
+                  <h3 className='card__title'>Certificate Info</h3>
+                  <div className='card__content'>
                     <p>Domain: {domain}</p>
-                    <p>Status: {status === "Active"
-                      ? <span className="green">{status}</span>
-                      : <span className="red">{status}</span>
+                    <p>Status: {status === 'Active'
+                      ? <span className='green'>{status}</span>
+                      : <span className='red'>{status}</span>
                     }
                     </p>
                     <p>Exp. Date: {moment(expireDate).format('MM Do, YYYY')}</p>
@@ -58,7 +59,11 @@ export class CertificateCard extends Component {
         }
       </div>
     );
-  };
+  }
+}
+
+CertificateCard.propTypes = {
+  authToken: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({

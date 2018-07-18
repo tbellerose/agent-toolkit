@@ -12,7 +12,7 @@ beforeEach(() => {
     startSetSites: jest.fn(),
     authToken: ''
   };
-  wrapper = shallow(<AccountSearch {...props} />);
+  wrapper = shallow(<AccountSearch { ...props } />);
 });
 
 test('should correctly render AccountSearch', () => {
@@ -20,7 +20,7 @@ test('should correctly render AccountSearch', () => {
 });
 
 test('should set authToken on input change', () => {
-  let value = 'abc123';
+  const value = 'abc123';
   wrapper.find('input').at(0).simulate('change', {
     target: { value }
   });

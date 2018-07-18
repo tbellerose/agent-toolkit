@@ -1,13 +1,13 @@
 import React from 'react';
 import 'isomorphic-fetch';
 import { shallow } from 'enzyme';
-import sites, { siteChecks } from '../fixtures/sites'
+import sites, { siteChecks } from '../fixtures/sites';
 import { GeneralCard } from '../../components/GeneralCard';
 
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<GeneralCard site={sites[0]} />)
+  wrapper = shallow(<GeneralCard site={ sites[0] } />);
   wrapper.instance.handleSiteChecks = () => {
     wrapper.setState(() => ({
       siteChecks
@@ -18,7 +18,7 @@ beforeEach(() => {
       displayMessageModal: true,
       messageModalText: 'Test'
     }));
-  }
+  };
 });
 
 test('should correctly render GeneralCard', () => {

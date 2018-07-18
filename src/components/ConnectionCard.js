@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import generator from 'generate-password';
 import { connect } from 'react-redux';
@@ -9,10 +10,10 @@ export class ConnectionCard extends Component {
   state = {
     connectionInfo: {
       hostname: '',
-      port: undefined,
+      port: null,
       status: '',
       users: [],
-      error: '',
+      error: ''
     },
     password: '',
     displayMessageModal: false,
@@ -138,66 +139,66 @@ export class ConnectionCard extends Component {
 
   componentDidMount() {
     this.getConnectionInfo();
-  };
+  }
 
   componentDidUpdate() {
     this.getConnectionInfo();
-  };
+  }
 
   render() {
-    const { hostname, port, status, users, error } = this.state.connectionInfo;
+    const { hostname, port, users, error } = this.state.connectionInfo;
     return (
-      <div className="card">
-        {!!error
-          ? <div className="card__content">{error}</div>
+      <div className='card'>
+        {error
+          ? <div className='card__content'>{error}</div>
           : (
             <div>
               {this.state.ready &&
                 <div>
-                  <h3 className="card__title">SSH/SFTP Info</h3>
-                  <div className="card__content">
+                  <h3 className='card__title'>SSH/SFTP Info</h3>
+                  <div className='card__content'>
                     <p>Host: {hostname}</p>
                     <p>Port: {port}</p>
                     <p>Support User: {users.length > 0
                       ? users[0].username
-                      : <span className="red">Inactive</span>
+                      : <span className='red'>Inactive</span>
                     }
                     </p>
                     {this.state.password &&
                       <p>Support Password: {this.state.password}</p>
                     }
                   </div>
-                  <div className="card__action">
+                  <div className='card__action'>
                     <button
-                      className="button"
-                      onClick={users.length > 0
+                      className='button'
+                      onClick={ users.length > 0
                         ? this.handleUpdateUser
-                        : this.handleCreateUser}
+                        : this.handleCreateUser }
                     >
                       {users.length > 0
-                        ? "Update User"
-                        : "Create User"
+                        ? 'Update User'
+                        : 'Create User'
                       }
                     </button>
                     {users.length > 0 &&
                       <button
-                        className="button"
-                        onClick={this.handleRemoveUser}
+                        className='button'
+                        onClick={ this.handleRemoveUser }
                       >
                         Remove User
                       </button>
                     }
                     <button
-                      className="button"
-                      onClick={this.handleResetPermissions}
+                      className='button'
+                      onClick={ this.handleResetPermissions }
                     >
                       Reset Permissions
                     </button>
                   </div>
                   <MessageModal
-                    modalIsOpen={this.state.displayMessageModal}
-                    handleCloseModal={this.handleCloseMessageModal}
-                    message={this.state.messageModalText}
+                    modalIsOpen={ this.state.displayMessageModal }
+                    handleCloseModal={ this.handleCloseMessageModal }
+                    message={ this.state.messageModalText }
                   />
                 </div>
               }
@@ -206,7 +207,12 @@ export class ConnectionCard extends Component {
         }
       </div>
     );
-  };
+  }
+}
+
+ConnectionCard.propTypes = {
+  authToken: PropTypes.string,
+  site: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

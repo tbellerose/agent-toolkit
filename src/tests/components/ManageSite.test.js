@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import "isomorphic-fetch";
+import 'isomorphic-fetch';
 import { ManageSite } from '../../components/ManageSite';
-import sites from '../fixtures/sites'
+import sites from '../fixtures/sites';
 
 let wrapper, match;
 
@@ -12,7 +12,7 @@ beforeEach(() => {
       siteId: sites[0].id
     }
   };
-  wrapper = shallow(<ManageSite match={match} />);
+  wrapper = shallow(<ManageSite match={ match } />);
   wrapper.setState(() => ({
     site: sites[0]
   }));
@@ -21,7 +21,7 @@ beforeEach(() => {
 test('should correctly render ManageSite with general card', () => {
   wrapper.setState(() => ({
     activeItem: 'general'
-  }))
+  }));
   expect(wrapper).toMatchSnapshot();
 });
 

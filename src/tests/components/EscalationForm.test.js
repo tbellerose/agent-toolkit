@@ -7,7 +7,7 @@ import sites, { siteChecks } from '../fixtures/sites';
 let wrapper;
 
 beforeEach(() => {
-  wrapper = shallow(<EscalationForm site={sites[0]} />);
+  wrapper = shallow(<EscalationForm site={ sites[0] } />);
 });
 
 test('should correctly render EscalationForm before submitted', () => {

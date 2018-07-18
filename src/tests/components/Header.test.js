@@ -15,8 +15,8 @@ beforeEach(() => {
     clearToken: jest.fn(),
     clearSites: jest.fn(),
     user: user
-  }
-  wrapper = shallow(<Header {...props} />);
+  };
+  wrapper = shallow(<Header { ...props } />);
 });
 
 test('should correctly render Header', () => {

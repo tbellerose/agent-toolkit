@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import EscalationModal from './EscalationModal';
 import MessageModal from './MessageModal';
@@ -10,7 +11,7 @@ export class GeneralCard extends Component {
     displayEscalationModal: false,
     displayMessageModal: false,
     messageModalText: '',
-    siteChecks: undefined,
+    siteChecks: null
   };
 
   handleEscalation = () => {
@@ -51,7 +52,6 @@ export class GeneralCard extends Component {
       this.props.authToken
     );
     if (error) {
-      console.log(error);
       this.setState(() => ({
         displayMessageModal: true,
         messageModalText: `There was a problem flushing the cache for ${primaryDomain}`
@@ -67,7 +67,7 @@ export class GeneralCard extends Component {
   handleSiteChecks = async () => {
     const { name: primaryDomain } = this.props.site.domains.primary;
     const { name: defaultDomain } = this.props.site.domains.default;
-    let urls = [];
+    const urls = [];
     if (primaryDomain === defaultDomain) {
       urls.push(primaryDomain);
     } else {
@@ -82,9 +82,9 @@ export class GeneralCard extends Component {
   render() {
     const { site } = this.props;
     return (
-      <div className="card">
-        <h3 className="card__title">Site Info</h3>
-        <div className="card__content">
+      <div className='card'>
+        <h3 className='card__title'>Site Info</h3>
+        <div className='card__content'>
           <p>Site ID: {site.id}</p>
           <p>Primary Domain: {site.domains.primary.name}</p>
           <p>Default Domain: {site.domains.default.name}</p>
@@ -92,8 +92,8 @@ export class GeneralCard extends Component {
           <p>Status:
             {
               site.status === 'Active'
-                ? <span className="green"> {site.status}</span>
-                : <span className="red"> {site.status}</span>
+                ? <span className='green'> {site.status}</span>
+                : <span className='red'> {site.status}</span>
             }
           </p>
           <p>WP Version: {site.version.wordPress}</p>
@@ -101,29 +101,34 @@ export class GeneralCard extends Component {
           <p>Cluster: {site.clusterId}</p>
           {this.state.siteChecks &&
             this.state.siteChecks.map((siteCheck, i) => (
-              <p key={i}>{siteCheck}</p>
+              <p key={ i }>{siteCheck}</p>
             ))
           }
         </div>
-        <div className="card__action">
-          <button className="button" onClick={this.handleRedeployPods}>Redeploy Pods</button>
-          <button className="button" onClick={this.handleFlushCache}>Flush Cache</button>
-          <button className="button" onClick={this.handleSiteChecks}>Site Checks</button>
-          <button className="button" onClick={this.handleEscalation}>Escalate</button>
+        <div className='card__action'>
+          <button className='button' onClick={ this.handleRedeployPods }>Redeploy Pods</button>
+          <button className='button' onClick={ this.handleFlushCache }>Flush Cache</button>
+          <button className='button' onClick={ this.handleSiteChecks }>Site Checks</button>
+          <button className='button' onClick={ this.handleEscalation }>Escalate</button>
         </div>
         <EscalationModal
-          modalIsOpen={this.state.displayEscalationModal}
-          handleCloseModal={this.handleCloseEscalationModal}
-          site={site}
+          modalIsOpen={ this.state.displayEscalationModal }
+          handleCloseModal={ this.handleCloseEscalationModal }
+          site={ site }
         />
         <MessageModal
-          modalIsOpen={this.state.displayMessageModal}
-          handleCloseModal={this.handleCloseMessageModal}
-          message={this.state.messageModalText}
+          modalIsOpen={ this.state.displayMessageModal }
+          handleCloseModal={ this.handleCloseMessageModal }
+          message={ this.state.messageModalText }
         />
       </div>
     );
-  };
+  }
+}
+
+GeneralCard.propTypes = {
+  authToken: PropTypes.string,
+  site: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

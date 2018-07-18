@@ -1,6 +1,14 @@
 {
+    "parser": "babel-eslint",
+    "rules": {
+        "strict": 0
+    },
     "extends": "godaddy-react",
     "plugins": [
-        "class-property"
-    ]
+        "babel",
+        "jest"
+    ],
+    "env": {
+        "jest": true
+    }
 }
