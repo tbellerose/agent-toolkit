@@ -86,14 +86,34 @@ export class ConnectionCard extends Component {
     } else {
       this.setState(() => ({
         displayMessageModal: true,
-        messageModalText: 'Support user removed'
+        messageModalText: 'Support user removed',
+        password: ''
+      }));
+    }
+  };
+
+  handleResetPermissions = async () => {
+    const siteId = this.props.site.id;
+    const reset = await postAPI(
+      `/support/sites/${siteId}/resetFilePermissions`,
+      this.props.authToken
+    );
+    if (reset.error) {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: 'There was a problem resetting file permissions'
+      }));
+    } else {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: `File permissions successfully reset`
       }));
     }
   };
 
   handleCloseMessageModal = () => {
     this.setState(() => ({ displayMessageModal: false }));
-  }
+  };
 
   getConnectionInfo = async () => {
     const { authToken, site } = this.props;
@@ -118,11 +138,11 @@ export class ConnectionCard extends Component {
 
   componentDidMount() {
     this.getConnectionInfo();
-  }
+  };
 
   componentDidUpdate() {
     this.getConnectionInfo();
-  }
+  };
 
   render() {
     const { hostname, port, status, users, error } = this.state.connectionInfo;
@@ -138,11 +158,6 @@ export class ConnectionCard extends Component {
                   <div className="card__content">
                     <p>Host: {hostname}</p>
                     <p>Port: {port}</p>
-                    <p>Status: {status === 'active'
-                      ? <span className="green">{status}</span>
-                      : <span className="red">{status}</span>
-                    }
-                    </p>
                     <p>Support User: {users.length > 0
                       ? users[0].username
                       : <span className="red">Inactive</span>
@@ -172,7 +187,12 @@ export class ConnectionCard extends Component {
                         Remove User
                       </button>
                     }
-                    <button className="button">Reset Permissions</button>
+                    <button
+                      className="button"
+                      onClick={this.handleResetPermissions}
+                    >
+                      Reset Permissions
+                    </button>
                   </div>
                   <MessageModal
                     modalIsOpen={this.state.displayMessageModal}
