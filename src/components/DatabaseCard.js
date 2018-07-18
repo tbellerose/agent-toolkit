@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAPI } from '../utils/api';
+import { postAPI } from '../utils/api';
+import MessageModal from './MessageModal';
 
 export class DatabaseCard extends Component {
   state = {
@@ -9,6 +11,8 @@ export class DatabaseCard extends Component {
     port: undefined,
     adminUsername: '',
     adminPassword: '',
+    displayMessageModal: false,
+    messageModalText: '',
     error: '',
     ready: false
   };
@@ -35,9 +39,32 @@ export class DatabaseCard extends Component {
     }));
   };
 
+  handleCloseMessageModal = () => {
+    this.setState(() => ({ displayMessageModal: false }));
+  };
+
+  handleResetPassword = async () => {
+    const siteId = this.props.site.id;
+    const { error } = await postAPI(
+      `/support/sites/${siteId}/database/resetPassword`,
+      this.props.authToken
+    );
+    if (error) {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: 'There was a problem resetting the password'
+      }));
+    } else {
+      this.setState(() => ({
+        displayMessageModal: true,
+        messageModalText: 'Database password reset'
+      }));
+    }
+  };
+
   componentDidMount() {
     this.getDatabaseInfo();
-  }
+  };
 
   render() {
     const { name, fqdn, port, adminPassword, adminUsername, ready } = this.state;
@@ -61,9 +88,14 @@ export class DatabaseCard extends Component {
                     <p>Password: {adminPassword}</p>
                   </div>
                   <div className="card__action">
-                    <button className="button">Reset Password</button>
+                    <button className="button" onClick={this.handleResetPassword}>Reset Password</button>
                     <button className="button">Kill Connections</button>
                   </div>
+                  <MessageModal
+                    modalIsOpen={this.state.displayMessageModal}
+                    handleCloseModal={this.handleCloseMessageModal}
+                    message={this.state.messageModalText}
+                  />
                 </div>
               }
             </div>

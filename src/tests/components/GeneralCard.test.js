@@ -1,4 +1,5 @@
 import React from 'react';
+import 'isomorphic-fetch';
 import { shallow } from 'enzyme';
 import sites, { siteChecks } from '../fixtures/sites'
 import { GeneralCard } from '../../components/GeneralCard';
@@ -38,9 +39,4 @@ test('should set displayEscalationModal to true', () => {
 test('should set displayEscalationModal to false', () => {
   wrapper.instance().handleCloseEscalationModal();
   expect(wrapper.state('displayEscalationModal')).toBe(false);
-});
-
-test('should set displayMessageModal to true', async () => {
-  await wrapper.find('button').at(1).simulate('click');
-  expect(wrapper.state('displayMessageModal')).toBe(true);
 });
