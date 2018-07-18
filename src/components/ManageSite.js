@@ -18,6 +18,12 @@ export class ManageSite extends Component {
     error: ''
   };
 
+  handleItemClick = (activeItem) => {
+    this.setState(() => ({
+      activeItem
+    }));
+  };
+
   getSite = async () => {
     const siteId = this.props.match.params.siteId;
     const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
@@ -27,12 +33,6 @@ export class ManageSite extends Component {
         error: site.error
       }));
     }
-  };
-
-  handleItemClick = (activeItem) => {
-    this.setState(() => ({
-      activeItem
-    }));
   };
 
   componentDidMount() {

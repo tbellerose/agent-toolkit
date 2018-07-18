@@ -20,23 +20,6 @@ export class DatabaseCard extends Component {
     ready: false
   };
 
-  getDatabaseInfo = async () => {
-    const siteId = this.props.site.id;
-    const database = await getAPI(`/sites/${siteId}/database`, this.props.authToken);
-    if (database.error) {
-      this.setState(() => ({
-        database: {
-          error: database.error
-        }
-      }));
-    } else if (!_.isEqual(this.state.database, database)) {
-      this.setState(() => ({
-        database,
-        ready: true
-      }));
-    }
-  };
-
   handleCloseMessageModal = () => {
     this.setState(() => ({ displayMessageModal: false }));
   };
@@ -56,6 +39,23 @@ export class DatabaseCard extends Component {
       this.setState(() => ({
         displayMessageModal: true,
         messageModalText: 'Database password reset'
+      }));
+    }
+  };
+
+  getDatabaseInfo = async () => {
+    const siteId = this.props.site.id;
+    const database = await getAPI(`/sites/${siteId}/database`, this.props.authToken);
+    if (database.error) {
+      this.setState(() => ({
+        database: {
+          error: database.error
+        }
+      }));
+    } else if (!_.isEqual(this.state.database, database)) {
+      this.setState(() => ({
+        database,
+        ready: true
       }));
     }
   };
