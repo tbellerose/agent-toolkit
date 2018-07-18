@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { getAPI } from '../utils/api';
 
 export class ConnectionCard extends Component {
   state = {
-    hostname: '',
-    port: undefined,
-    status: '',
-    error: '',
+    connectionInfo: {
+      hostname: '',
+      port: undefined,
+      status: '',
+      error: '',
+    },
     ready: false
   };
 
   getConnectionInfo = async () => {
     const { authToken, site } = this.props;
-    const { hostname, port, status, error } = await getAPI(
+    const connectionInfo = await getAPI(
       `/support/sites/${site.id}/ssh`,
       authToken
     );
-    this.setState(() => ({
-      hostname,
-      port,
-      status,
-      error,
-      ready: true
-    }));
+
+    if (connectionInfo.error) {
+      this.setState(() => ({
+        connectionInfo: {
+          error: connectionInfo.error
+        }
+      }));
+    } else if (!_.isEqual(this.state.connectionInfo, connectionInfo)) {
+      this.setState(() => ({
+        connectionInfo,
+        ready: true
+      }));
+    }
   };
 
   componentDidMount() {
@@ -31,14 +40,14 @@ export class ConnectionCard extends Component {
   }
 
   render() {
-    const { hostname, port, status, error, ready } = this.state;
+    const { hostname, port, status, error } = this.state.connectionInfo;
     return (
       <div className="card">
         {!!error
           ? <div className="card__content">{error}</div>
           : (
             <div>
-              {ready &&
+              {this.state.ready &&
                 <div>
                   <h3 className="card__title">SSH/SFTP Info</h3>
                   <div className="card__content">
