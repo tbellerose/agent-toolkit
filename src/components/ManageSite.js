@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { getAPI } from '../utils/api';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
@@ -20,10 +21,12 @@ export class ManageSite extends Component {
   getSite = async () => {
     const siteId = this.props.match.params.siteId;
     const site = await getAPI(`/sites/${siteId}`, this.props.authToken);
-    this.setState(() => ({
-      site,
-      error: site.error
-    }));
+    if (!_.isEqual(this.state.site, site)) {
+      this.setState(() => ({
+        site,
+        error: site.error
+      }));
+    }
   };
 
   handleItemClick = (activeItem) => {
@@ -35,6 +38,10 @@ export class ManageSite extends Component {
   componentDidMount() {
     this.getSite();
   };
+
+  componentDidUpdate() {
+    this.getSite();
+  }
 
   render() {
     return (

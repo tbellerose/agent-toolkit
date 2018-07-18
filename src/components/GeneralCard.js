@@ -92,8 +92,8 @@ export class GeneralCard extends Component {
           <p>Status:
             {
               site.status === 'Active'
-                ? <span className="green">{site.status}</span>
-                : <span className="red">{site.status}</span>
+                ? <span className="green"> {site.status}</span>
+                : <span className="red"> {site.status}</span>
             }
           </p>
           <p>WP Version: {site.version.wordPress}</p>
