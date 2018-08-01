@@ -15,7 +15,7 @@ export const formatForSlack = ({
   primaryDomain,
   defaultDomain,
   details
-}) => `#### MWP 2.0 Assistance Request ####
+}) => `#### MWP 2.0 Issue Tracker ####
     Site ID: \`${siteId}\`
     Primary Domain: \`${primaryDomain}\`
     Default Domain: \`${defaultDomain}\`
