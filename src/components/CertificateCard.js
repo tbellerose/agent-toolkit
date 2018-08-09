@@ -16,14 +16,18 @@ export class CertificateCard extends Component {
   getCertificateInfo = async () => {
     const { authToken, site } = this.props;
     const response = await getAPI(`/sites/${site.id}/certificates`, authToken);
-    const { domain, expireDate, status, error } = response[0];
-    this.setState(() => ({
-      domain,
-      expireDate,
-      status,
-      error,
-      ready: true
-    }));
+    const { error } = response;
+    if (error) {
+      this.setState(() => ({ error }));
+    } else {
+      const { domain, expireDate, status } = response[0];
+      this.setState(() => ({
+        domain,
+        expireDate,
+        status,
+        ready: true
+      }));
+    }
   };
 
   componentDidMount() {
